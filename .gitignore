@@ -1,0 +1,5 @@
+*.pyc
+db.sqlite3
+script.sql
+LPapp/connections.py
+screenshots/

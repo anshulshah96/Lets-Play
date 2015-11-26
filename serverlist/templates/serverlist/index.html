@@ -1,0 +1,9 @@
+{% if latest_server_list %}
+    <ul>
+    {% for server in latest_server_list %}
+        <li>{{ server.host }} : {{ server.map_name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No servers are available.</p>
+{% endif %}
