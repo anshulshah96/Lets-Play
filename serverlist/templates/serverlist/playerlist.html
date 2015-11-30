@@ -1,0 +1,23 @@
+<h1>IP : {{ server.ip }}</h1>
+<h2>Map Name : {{ server.map_name }}</h2>
+
+{% if player_list %}
+	<div id ="table"> 
+		<table border=10>
+			<tr>
+				<th>Name</th>
+				<th>Score</th>
+				<th>Duration</th>
+			</tr>
+			{% for player in player_list %}
+			<tr>
+				<th>{{ player.name }}</th>
+				<th>{{ player.score }}</th>
+				<th>{{ player.duration }}</th>
+			</tr>
+			{% endfor %}
+	    </table>
+    </div>
+{% else %}
+    <p>No player is present.</p>
+{% endif %}

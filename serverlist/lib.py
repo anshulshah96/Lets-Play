@@ -172,8 +172,8 @@ class SourceQuery(object):
 
         after = time.time()
         # print "Checking..."
-        server_type = packet.getByte()
-        if server_type == 109:
+        header = packet.getByte()
+        if header == 109:
             # print "Parsing..."
             result = {}
             result['header'] = "m"
@@ -205,7 +205,7 @@ class SourceQuery(object):
             
             return result
 
-        elif server_type == 73:
+        elif header == 73:
             # print "Parsing..."
             result = {}
             result['header'] = "I"

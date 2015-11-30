@@ -1,9 +1,30 @@
 {% if latest_server_list %}
-    <ul>
-    {% for server in latest_server_list %}
-        <li>{{ server.host }} : {{ server.map_name }}</li>
-    {% endfor %}
-    </ul>
+	<div id ="table"> 
+		<table border=10>
+			<tr>
+				<th>IP Address</th>
+				<th>Map</th>
+				<th>Password Protected</th>
+				<th>Number of Players</th>
+				<th>Maximum Players Allowed</th>
+				<th>Number Of Bots</th>
+				<th>Environment</th>
+				<th>Server Name</th>
+			</tr>
+			{% for server in latest_server_list %}
+			<tr>
+				<th><a href="{{ server.link }}/">{{ server.ip }}</th>
+				<th>{{ server.map_name }}</th>
+				<th>{{ server.password_protected }}</th>
+				<th>{{ server.num_players }}</th>
+				<th>{{ server.max_players }}</th>
+				<th>{{ server.num_bots }}</th>
+				<th>{{ server.environment }}</th>
+				<th>{{ server.server_name }}</th>
+			</tr>
+			{% endfor %}
+	    </table>
+    </div>
 {% else %}
     <p>No servers are available.</p>
 {% endif %}
