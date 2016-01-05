@@ -1,6 +1,6 @@
-from __future__ import absolute_import
-from serverlist.celery import app
-from celery import Celery
+from django.apps import AppConfig
+# from serverlist.celery import app
+# from celery import Celery
 import socket, sys
 from struct import *
 from serverlist.lib import *
@@ -9,14 +9,20 @@ import thread
 import time
 from serverlist.models import *
 
-app = Celery('tasks', backend='rpc://', broker='amqp://')
-
 UDP_IP = "172.25.12.131"
 UDP_PORT = 27015
 exitFlag = 0
 x_LOWER_LIMIT = 10
 x_UPPER_LIMIT = 30
 nslist = []
+
+class MyAppConfig(AppConfig):
+    name = 'serverlist'
+    verbose_name = "My Application"
+    def ready(self):
+		thread.start_new_thread(continuous_scan,())
+		pass
+
 class myThread (threading.Thread):
     def __init__(self, hostaddress):
         threading.Thread.__init__(self)
@@ -25,6 +31,7 @@ class myThread (threading.Thread):
         # print "Starting " + self.hostaddress
         scan(self.hostaddress)
         # print "Exiting " + self.hostaddress
+
 def scan(hostaddress):
 	global nslist
 	try:
@@ -60,5 +67,3 @@ def single_scan():
 			t.join()
 		tlist = []
 	print "Scan Complete"
-
-thread.start_new_thread(continuous_scan,())
