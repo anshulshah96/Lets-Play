@@ -17,7 +17,7 @@ tplist = []
 SLEEP_TIME = 10
 
 class MyAppConfig(AppConfig):
-	logging.basicConfig(level=logging.INFO)
+	logging.basicConfig(level=logging.ERROR)
 	name = 'serverlist'
 	verbose_name = "My Application"
 	def ready(self):
@@ -40,7 +40,7 @@ class MyAppConfig(AppConfig):
 						new_server.set_server_type(info_elements['server_type'])
 						new_server.set_environment(info_elements['environment'])
 						new_server.set_password_protected(info_elements['password'])
-						new_server.set_vac_secured(info_elements['vac'])
+						# new_server.set_vac_secured(info_elements['vac'])
 						new_server.set_header_response(info_elements['header'])
 						nslist.append(new_server)
 						server = SourceQuery(info_elements['host_ip'],UDP_PORT)
@@ -50,7 +50,7 @@ class MyAppConfig(AppConfig):
 						    new_player.server_name = new_server.ip
 						    tplist.append(new_player)
 						info = info_elements['host_ip'] + " " + info_elements['header'] + " found: " + info_elements['map']
-						logging.info(info)
+						logging.debug(info)
 				    Server.objects.all().delete()
 				    PlayerTemp.objects.all().delete()
 				    for serv in nslist:
@@ -59,9 +59,9 @@ class MyAppConfig(AppConfig):
 							if player.server_name == serv.ip:
 								player.server = serv
 								player.save()
-				except (KeyboardInterrupt, SystemExit):
-					logging.info(str(len(nslist)) + " servers found")
-					break
+				except KeyboardInterrupt:
+					logging.info(str(len(nslist)) + " servers found exiting...")
+					raise
 				except Exception, msg:
 					logging.exception(str(msg))
 				logging.info(str(len(nslist)) + " servers found, sleeping for " + str(SLEEP_TIME) + " seconds")

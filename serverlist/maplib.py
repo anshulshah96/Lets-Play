@@ -171,7 +171,10 @@ class sendThread (threading.Thread):
 				try:
 					self.udp.sendto(spacket.getvalue(),(current_ip, self.port))
 				except socket.error, msg:
-					logging.exception("Sender Error at ip "+ current_ip + " error: " + str(msg))
+					if(msg[0] == 1):
+						logging.debug("Sender Error at ip "+ current_ip + " error: " + str(msg))
+					else:
+						logging.info("Sender Error at ip "+ current_ip + " error: " + str(msg))
 					continue
 		logging.info("Sender Thread Ended")
 
@@ -197,7 +200,7 @@ class receiverThread (threading.Thread):
 					continue
 			else:
 				dat  = packet.parsePacket()
-				logging.info("Parsed map info from "+addr[0])
+				logging.debug("Parsed map info from "+addr[0])
 				server_list.append(dat)
 		logging.info("Receiver Thread Ended")
 
