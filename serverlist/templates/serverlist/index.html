@@ -8,8 +8,11 @@
 				<th>Number of Players</th>
 				<th>Maximum Players Allowed</th>
 				<th>Number Of Bots</th>
+				<th>Game Name</th>
 				<th>Environment</th>
 				<th>Server Name</th>
+				<th>Response Type</th>
+				<th>Secure From Cheats</th>
 				<th>Server Type</th>
 			</tr>
 			{% for server in latest_server_list %}
@@ -20,8 +23,11 @@
 				<th>{{ server.num_players }}</th>
 				<th>{{ server.max_players }}</th>
 				<th>{{ server.num_bots }}</th>
+				<th>{{ server.game_name }}</th>
 				<th>{{ server.environment }}</th>
 				<th>{{ server.server_name }}</th>
+				<th>{{ server.response_header }}</th>
+				<th>{{ server.vac_secured }}</th>
 				<th>{{ server.server_type }}</th>
 			</tr>
 			{% endfor %}

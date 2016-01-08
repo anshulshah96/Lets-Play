@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-import socket, sys
+import socket, sys, os
 from struct import *
 from serverlist.lib import *
 from serverlist.maplib import *

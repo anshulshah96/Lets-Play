@@ -82,16 +82,16 @@ class SourceQueryPacket(StringIO.StringIO):
 			result['mod'] = self.getByte()
 
 			### Too verbose results ###
-			# if result['mod'] == 1:
-			#     result['link'] = self.getString()
-			#     result['download_link'] = self.getString()
-			#     self.getByte()
-			#     result['version'] = self.getLong()
-			#     result['size'] = self.getLong()
-			#     result['type'] = self.getByte()
-			#     result['dll'] = self.getByte()
-			# result['vac'] = self.getByte()
-			# result['bots'] = self.getByte()
+			if int(result['mod']) == 1:
+			    result['link'] = self.getString()
+			    result['download_link'] = self.getString()
+			    self.getByte()
+			    result['version'] = self.getLong()
+			    result['size'] = self.getLong()
+			    result['type'] = self.getByte()
+			    result['dll'] = self.getByte()
+			result['vac'] = self.getByte()
+			result['bots'] = self.getByte()
 			return result
 
 		elif header == A2S_INFO_REPLY_NEW:

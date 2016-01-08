@@ -111,7 +111,8 @@ class SourceQuery(object):
             logging.error("KeyboardInterrupt exiting...")   
             sys.exit(0)
         except Exception, e:
-            logging.exception(str(e))
+            logging.error("Error while player query for " + self.host)
+            # logging.error(str(e))
             return []
         else:
             self.udp.send(packet.getvalue())
