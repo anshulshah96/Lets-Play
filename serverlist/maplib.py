@@ -198,6 +198,9 @@ class receiverThread (threading.Thread):
 				else:
 					logging.exception("Receiver Error " + str(msg))
 					continue
+			except KeyboardInterrupt:
+				logging.error("KeyboardInterrupt exiting...")	
+				sys.exit(0)
 			else:
 				dat  = packet.parsePacket()
 				logging.debug("Parsed map info from "+addr[0])
@@ -209,6 +212,9 @@ class receiverThread (threading.Thread):
 			data, addr = self.udp.recvfrom(PACKETSIZE)
 		except socket.error, msg:
 			raise
+		except KeyboardInterrupt:
+			logging.error("KeyboardInterrupt exiting...")	
+			sys.exit(0)
 		else:
 			logging.info("Data received from" + str(addr))
 			packet = SourceQueryPacket(data)

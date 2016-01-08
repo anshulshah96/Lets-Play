@@ -61,10 +61,15 @@ class MyAppConfig(AppConfig):
 								player.save()
 				except KeyboardInterrupt:
 					logging.info(str(len(nslist)) + " servers found exiting...")
+					sys.exit(0)
 					raise
 				except Exception, msg:
 					logging.exception(str(msg))
 				logging.info(str(len(nslist)) + " servers found, sleeping for " + str(SLEEP_TIME) + " seconds")
 				time.sleep(SLEEP_TIME)
-		thread.start_new_thread(continuous_scan,())
+		try:
+			thread.start_new_thread(continuous_scan,())
+		except Exception, e:
+			logging.exception(str(e))
+			sys.exit(0)
 
