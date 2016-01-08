@@ -1,6 +1,7 @@
 """http://developer.valvesoftware.com/wiki/Server_Queries"""
 import socket, struct, sys, time
 import StringIO
+from serverlist.maplib import *
 
 PACKETSIZE=1400
 
@@ -22,46 +23,6 @@ A2S_RULES_REPLY = ord('E')
 # S2C_CHALLENGE
 CHALLENGE = -1
 S2C_CHALLENGE = ord('A')
-
-class SourceQueryPacket(StringIO.StringIO):
-    # putting and getting values
-    def putByte(self, val):
-        self.write(struct.pack('<B', val))
-
-    def getByte(self):
-        return struct.unpack('<B', self.read(1))[0]
-
-    def putShort(self, val):
-        self.write(struct.pack('<h', val))
-
-    def getShort(self):
-        return struct.unpack('<h', self.read(2))[0]
-
-    def putLong(self, val):
-        self.write(struct.pack('<l', val))
-
-    def getLong(self):
-        return struct.unpack('<l', self.read(4))[0]
-
-    def getLongLong(self):
-        return struct.unpack('<Q', self.read(8))[0]
-
-    def putFloat(self, val):
-        self.write(struct.pack('<f', val))
-
-    def getFloat(self):
-        return struct.unpack('<f', self.read(4))[0]
-
-    def putString(self, val):
-        self.write(val + '\x00')
-
-    def getString(self):
-        val = self.getvalue()
-        start = self.tell()
-        end = val.index('\0', start)
-        val = val[start:end]
-        self.seek(end+1)
-        return val
 
 class SourceQueryError(Exception):
     pass
@@ -190,6 +151,7 @@ class SourceQuery(object):
             result['environment'] = chr(packet.getByte())
             result['password'] = packet.getByte()
             result['mod'] = packet.getByte()
+            result['vac'] = None
 
             ### Too verbose results ###
             # if result['mod'] == 1:

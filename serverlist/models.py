@@ -28,6 +28,7 @@ class Server(models.Model):
 	def __str__(self):
 		return self.host + " : " + self.map_name 
 	def set_server_type(self,character):
+		character = ord(character)
 		if character == 100 or character == 68:
 			self.server_type = "Dedicated"
 		elif character == 108 or character == 76:
@@ -41,6 +42,7 @@ class Server(models.Model):
 				self.server_type = "Dedicated"
 				print err.args
 	def set_environment(self,character):
+		character = ord(character)
 		if character == 119 or character == 87:
 			self.environment = "Windows"
 		elif character == 108 or character == 76:
@@ -55,9 +57,9 @@ class Server(models.Model):
 				print err.args
 	def set_password_protected(self,num):
 		if num == 0:
-			self.password_protected = No
+			self.password_protected = "No"
 		elif num == 1:
-			self.password_protected = Yes
+			self.password_protected = "Yes"
 		else:
 			try:
 				raise Exception("Unknown Visibility")
@@ -69,6 +71,8 @@ class Server(models.Model):
 			self.vac_secured = False
 		elif num == 1:
 			self.vac_secured = True
+		elif num == None:
+			self.vac_secured = False
 		else:
 			try:
 				raise Exception("Unknown VAC")
@@ -76,6 +80,7 @@ class Server(models.Model):
 				self.vac_secured = False
 				print err.args
 	def set_header_response(self,character):
+		character = ord(character)
 		if character == 109:
 			self.response_header = "OLD"
 		elif character == 73:
@@ -97,7 +102,7 @@ class Server(models.Model):
 		}
 
 class PlayerTemp(models.Model):
-	server = models.ForeignKey(Server,default = None)
+	server = models.ForeignKey(Server,null=True, blank=True)
 	score = models.IntegerField(default=0)
 	duration = models.IntegerField(default=0)
 	name = models.CharField(max_length=200)

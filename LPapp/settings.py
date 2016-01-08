@@ -65,6 +65,9 @@ DATABASES = {
         'NAME': connections.db,
     'USER':connections.user,
     'PASSWORD':connections.password,
+    'OPTIONS': {
+         "init_command": "SET foreign_key_checks = 0;",
+    },
     }
 }
 

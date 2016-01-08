@@ -1,69 +1,70 @@
 from django.apps import AppConfig
-# from serverlist.celery import app
-# from celery import Celery
 import socket, sys
 from struct import *
 from serverlist.lib import *
+from serverlist.maplib import *
 import threading
 import thread
 import time
 from serverlist.models import *
-
-UDP_IP = "172.25.12.131"
+import logging
+ 
 UDP_PORT = 27015
-exitFlag = 0
-x_LOWER_LIMIT = 10
-x_UPPER_LIMIT = 30
+axlimits = [1,255]
+aylimits = [1,255]
 nslist = []
+tplist = []
+SLEEP_TIME = 10
 
 class MyAppConfig(AppConfig):
-    name = 'serverlist'
-    verbose_name = "My Application"
-    def ready(self):
+	logging.basicConfig(level=logging.INFO)
+	name = 'serverlist'
+	verbose_name = "My Application"
+	def ready(self):
+		def continuous_scan():
+			global nslist
+			global tplist
+			global axlimits
+			global aylimits
+			while True:
+				nslist = []
+				tplist = []
+				try:
+				    scanner = SourceScanner(timeout = 5.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner.scanServers()
+				    server_list = scanner.getServerList()
+				    for info_elements in server_list:
+						new_server = Server(ip = info_elements['host_ip'],map_name = info_elements['map'],host = info_elements['host_ip'],
+										num_players = info_elements['numplayers'],max_players = info_elements['maxplayers'],
+										server_name = info_elements['name'],game_name = info_elements['game'],folder = info_elements['folder'])
+						new_server.set_server_type(info_elements['server_type'])
+						new_server.set_environment(info_elements['environment'])
+						new_server.set_password_protected(info_elements['password'])
+						new_server.set_vac_secured(info_elements['vac'])
+						new_server.set_header_response(info_elements['header'])
+						nslist.append(new_server)
+						server = SourceQuery(info_elements['host_ip'],UDP_PORT)
+						player_list = server.player()
+						for player in player_list:
+						    new_player = PlayerTemp(score = player['score'], name = player['name'], duration = player['duration'])
+						    new_player.server_name = new_server.ip
+						    tplist.append(new_player)
+						info = info_elements['host_ip'] + " " + info_elements['header'] + " found: " + info_elements['map']
+						logging.info(info)
+				    Server.objects.all().delete()
+				    PlayerTemp.objects.all().delete()
+				    for serv in nslist:
+						serv.save()
+						for player in tplist:
+							if player.server_name == serv.ip:
+								player.server = serv
+								player.save()
+				except (KeyboardInterrupt, SystemExit):
+					logging.info(str(len(nslist)) + " servers found")
+					break
+				except Exception, msg:
+					logging.exception(str(msg))
+				logging.info(str(len(nslist)) + " servers found, sleeping for " + str(SLEEP_TIME) + " seconds")
+				time.sleep(SLEEP_TIME)
 		thread.start_new_thread(continuous_scan,())
-		pass
 
-class myThread (threading.Thread):
-    def __init__(self, hostaddress):
-        threading.Thread.__init__(self)
-        self.hostaddress = hostaddress
-    def run(self):
-        # print "Starting " + self.hostaddress
-        scan(self.hostaddress)
-        # print "Exiting " + self.hostaddress
-
-def scan(hostaddress):
-	global nslist
-	try:
-		server = SourceQuery(hostaddress, UDP_PORT)
-		info_elements = server.info()
-		new_server = Server(ip = hostaddress,map_name = info_elements['map'],host = info_elements['hostname'],num_players = info_elements['numplayers'],max_players = info_elements['maxplayers'])
-		nslist.append(new_server)
-		info = hostaddress+"  "+info_elements['header']+" found:  "+info_elements['map']
-		print info
-	except socket.error, msg:
-		pass
-def continuous_scan():
-	global nslist
-	while True:
-		single_scan()
-		print "The list is",nslist
-		Server.objects.all().delete()
-		for serv in nslist:
-			serv.save()
-		nslist = []
-		print "List updated...sleeping for 10 sec"
-		time.sleep(10)
-	print "Exiting Main Thread"
-def single_scan():
-	tlist = []
-	for x in range(x_LOWER_LIMIT,x_UPPER_LIMIT):
-		print x
-		for y in range(0,256):
-			thread = myThread("172.25."+str(x)+"."+str(y))
-			thread.start()
-			tlist.append(thread)
-		for t in tlist:
-			t.join()
-		tlist = []
-	print "Scan Complete"

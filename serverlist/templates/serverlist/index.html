@@ -10,6 +10,7 @@
 				<th>Number Of Bots</th>
 				<th>Environment</th>
 				<th>Server Name</th>
+				<th>Server Type</th>
 			</tr>
 			{% for server in latest_server_list %}
 			<tr>
@@ -21,6 +22,7 @@
 				<th>{{ server.num_bots }}</th>
 				<th>{{ server.environment }}</th>
 				<th>{{ server.server_name }}</th>
+				<th>{{ server.server_type }}</th>
 			</tr>
 			{% endfor %}
 	    </table>
