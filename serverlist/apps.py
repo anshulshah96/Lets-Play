@@ -36,7 +36,9 @@ class MyAppConfig(AppConfig):
 				    for info_elements in server_list:
 						new_server = Server(ip = info_elements['host_ip'],map_name = info_elements['map'],host = info_elements['host_ip'],
 										num_players = info_elements['numplayers'],max_players = info_elements['maxplayers'],
-										server_name = info_elements['name'],game_name = info_elements['game'],folder = info_elements['folder'])
+										server_name = info_elements['name'],game_name = info_elements['game'],folder = info_elements['folder'],
+										protocol = info_elements['protocol'],num_bots = info_elements['bots'],
+										num_humans = info_elements['numplayers'] - info_elements['bots'])
 						new_server.set_server_type(info_elements['server_type'])
 						new_server.set_environment(info_elements['environment'])
 						new_server.set_password_protected(info_elements['password'])
@@ -69,6 +71,7 @@ class MyAppConfig(AppConfig):
 				time.sleep(SLEEP_TIME)
 		try:
 			thread.start_new_thread(continuous_scan,())
+			pass
 		except Exception, e:
 			logging.exception(str(e))
 			sys.exit(0)

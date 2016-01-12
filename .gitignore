@@ -3,3 +3,4 @@ db.sqlite3
 script.sql
 LPapp/connections.py
 screenshots/
+serverlist/migrations/

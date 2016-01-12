@@ -99,10 +99,11 @@ class SourceQuery(object):
             return challenge
 
     def player(self):
-        challenge = self.connect(True)
+
 
         # now obtain the actual player info
         try:
+            challenge = self.connect(True)
             packet = SourceQueryPacket()
             packet.putLong(WHOLE)
             packet.putByte(A2S_PLAYER)

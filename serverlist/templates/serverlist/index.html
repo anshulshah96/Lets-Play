@@ -1,38 +1,126 @@
-{% if latest_server_list %}
-	<div id ="table"> 
-		<table border=10>
-			<tr>
-				<th>IP Address</th>
-				<th>Map</th>
-				<th>Password Protected</th>
-				<th>Number of Players</th>
-				<th>Maximum Players Allowed</th>
-				<th>Number Of Bots</th>
-				<th>Game Name</th>
-				<th>Environment</th>
-				<th>Server Name</th>
-				<th>Response Type</th>
-				<th>Secure From Cheats</th>
-				<th>Server Type</th>
-			</tr>
+<html>
+<head>
+	<title> Let's Play</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			height: 100%;
+			background-color: #fafafa;
+			font-family: 'Roboto', sans-serif;
+			padding: 0;
+			margin: 0;
+			color: #333;
+		}
+		.main{
+			width: 950px;
+			padding: 0;
+			background-color: #fff;
+			margin: 0 auto;
+			border-left:  1px solid #ddd;
+			border-right:  1px solid #ddd;
+			min-height: 100%;
+		}
+		.banner{
+			text-align: center;
+			font-size: 60px;
+			font-weight: 100;
+			padding-top: 50px;
+			padding-bottom: 40px;
+		}
+		.content{
+			width: 900px;
+			margin: 0 auto;
+		}
+		.playerslink{
+			text-decoration: none;
+			color: black;
+		}
+		.entry.Yes{
+			background-color: #fff3f3;
+		}
+		.entry{
+			color: #333;
+			font-family: 'Roboto',sans-serif;
+			font-weight: 300;
+			width: 800px;
+			height: 65px;
+			background-color: #fafafa;
+			border-radius: 6px;
+			border:  1px solid #ddd;
+			margin: 20px auto;
+			padding: 20px;
+			font-size: 16px;
+		}
+		.specrow{
+			padding: 5px 0;
+			width: 100%;
+		}
+		.spec{
+			display: inline-block;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.game{
+			width: 46%;
+		}
+		.map{
+			width: 34%;
+		}
+		.players{
+			width: 18%;
+		}
+		.ip{
+			margin-bottom: 10px;
+			font-size: 20px;
+			font-weight: 200;
+		}
+		.pass{
+			font-size: 12px;
+			color: #ee4433;
+		}
+		.footer{
+			height: 20px;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="banner">
+		Let's Play
+	</div>
+	<div class="middle">
+		<div class="content">
+			{% if latest_server_list %}
 			{% for server in latest_server_list %}
-			<tr>
-				<th><a href="{{ server.link }}/">{{ server.ip }}</th>
-				<th>{{ server.map_name }}</th>
-				<th>{{ server.password_protected }}</th>
-				<th>{{ server.num_players }}</th>
-				<th>{{ server.max_players }}</th>
-				<th>{{ server.num_bots }}</th>
-				<th>{{ server.game_name }}</th>
-				<th>{{ server.environment }}</th>
-				<th>{{ server.server_name }}</th>
-				<th>{{ server.response_header }}</th>
-				<th>{{ server.vac_secured }}</th>
-				<th>{{ server.server_type }}</th>
-			</tr>
+			<a class="playerslink" href="{{ server.link }}/">
+				<div class="entry {{ server.password_protected }}">
+ 					<div class="ip">
+						{{ server.server_name }} ({{ server.ip }})
+					</div>
+					<div class="specrow">
+						<div class="spec game">
+							Game: {{ server.game_name }} ({{ server.protocol }})
+						</div>
+						<div class="spec map">
+							Map: {{ server.map_name }}
+						</div>
+						<div class="spec players">
+							{{ server.num_humans }} Players + {{ server.num_bots }} Bots
+						</div>
+					</div>
+				</div>
+			</a>
 			{% endfor %}
-	    </table>
-    </div>
-{% else %}
-    <p>No servers are available.</p>
-{% endif %}
+			{% else %}
+			<div class="entry {{ server.password_protected }}">
+				<div class="ip">
+					No servers could be found.
+				</div>{% endif %}
+			</div>
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+</body>
+</html>

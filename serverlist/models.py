@@ -13,8 +13,9 @@ class Server(models.Model):
 	server_name = models.CharField(max_length=200)	#Ex. Exams Over B**ch!
 	game_name = models.CharField(max_length=200,default="Counter-Strike 1.6")	#Ex. Counter-Strike 1.6
 	host = models.CharField(max_length=200)			#Ex. 172.25.12.131:27015
-	num_players = models.IntegerField(default=0)	
+	num_players = models.IntegerField(default=0)
 	max_players = models.IntegerField(default=0)
+	num_humans = models.IntegerField(default=0)
 	num_bots = models.IntegerField(default=0)
 	folder = models.CharField(max_length=200)
 	environment = models.CharField(max_length=200,default = "Windows")		# w-Windows,l-Linux,m/o-Mac
@@ -22,7 +23,7 @@ class Server(models.Model):
 	vac_secured = models.NullBooleanField(default=False)		#0 for unsecured, 1 for secured
 	folder = models.CharField(max_length=200,default="None")
 	server_type = models.CharField(max_length=200,default="None")	
-	protocol = models.CharField(max_length=200,default="None")	
+	protocol = models.IntegerField(default=0)
 	response_header = models.CharField(max_length=200,default="None")	
 	mod = models.BooleanField(default=False)
 	def __str__(self):
