@@ -1,23 +1,223 @@
-<h1>IP : {{ server.ip }}</h1>
-<h2>Map Name : {{ server.map_name }}</h2>
+<html>
+<head>
+	<title> Let's Play</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	<style>
+		body{
+			height: 100%;
+			background-color: #fafafa;
+			font-family: 'Roboto', sans-serif;
+			padding: 0;
+			margin: 0;
+			color: #333;
+		}
+		.main{
+			width: 950px;
+			padding: 0;
+			background-color: #fff;
+			margin: 0 auto;
+			border-left:  1px solid #ddd;
+			border-right:  1px solid #ddd;
+			min-height: 100%;
+		}
+		.banner{
+			text-align: center;
+			font-size: 60px;
+			font-weight: 100;
+			padding-top: 50px;
+			padding-bottom: 40px;
+		}
+		.content{
+			width: 900px;
+			margin: 0 auto;
+		}
+		.playerslink{
+			text-decoration: none;
+			color: black;
+		}
+		.entry.Yes{
+			background-color: #fff3f3;
+		}
+		.entry{
+			color: #333;
+			font-family: 'Roboto',sans-serif;
+			font-weight: 300;
+			width: 800px;
+			
+			background-color: #fafafa;
+			border-radius: 6px;
+			border:  1px solid #ddd;
+			margin: 20px auto;
+			padding: 20px;
+			font-size: 16px;
+		}
+		.specrow{
+			padding: 5px 0;
+			width: 100%;
+		}
+		.spec{
+			display: inline-block;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.game{
+			width: 46%;
+		}
+		.map{
+			width: 34%;
+		}
+		.players{
+			width: 18%;
+		}
+		.ip{
+			margin-bottom: 25px;
+			font-size: 20px;
+			font-weight: 200;
+		}
+		.pass{
+			font-size: 12px;
+			color: #ee4433;
+		}
+		.footer{
+			height: 20px;
+		}
+		table{
+			width: 100%;
+			
+			
+		}
+		
 
-{% if player_list %}
-	<div id ="table"> 
-		<table border=10>
-			<tr>
-				<th>Name</th>
-				<th>Score</th>
-				<th>Duration</th>
-			</tr>
-			{% for player in player_list %}
-			<tr>
-				<th>{{ player.name }}</th>
-				<th>{{ player.score }}</th>
-				<th>{{ player.duration }}</th>
-			</tr>
-			{% endfor %}
-	    </table>
-    </div>
-{% else %}
-    <p>No player is present.</p>
-{% endif %}
+		.pth{
+			font-size: 16px;
+			padding-bottom: 12px;
+			font-weight: 300;
+		}
+		.headertr{
+			font-size: 20px;
+			font-weight: 300;
+			padding-top: 16px;
+		}
+		.serverinfo{
+			margin-top: 20px;
+			margin-right: 20px;
+			line-height: 24px;
+			display: inline-block;
+			width: 30%;
+			vertical-align: top;
+		}
+		.playerinfo{
+			
+			width: 60%;
+			padding: 10px;
+			display: inline-block;
+			border-radius: 6px;
+			border: 1px solid #ddd;
+			background-color: #ffffff;
+		}
+		.sth{
+			text-align: left;
+			font-weight: 200;
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="banner">
+		Let's Play
+	</div>
+	<div class="middle">
+		<div class="content">
+			
+			
+			<a class="playerslink" href="{{ server.link }}/">
+				<div class="entry {{ server.password_protected }}">
+ 					<div class="ip">
+						{{ server.server_name }} ({{ server.ip }})
+					</div>
+					<div class="serverinfo">
+						<table>
+							<tr>
+								<th class="sth">IP Address</th>
+								<th class="sth">{{ server.ip }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Map</th>
+								<th class="sth">{{ server.map_name }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Password</th>
+								<th class="sth">{{ server.password_protected }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Total Players</th>
+								<th class="sth">{{ server.num_players }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Max Players</th>
+								<th class="sth">{{ server.max_players }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Bots</th>
+								<th class="sth">{{ server.num_bots }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Game</th>
+								<th class="sth">{{ server.game_name }}</th>
+								
+							</tr>
+							<tr>
+								<th class="sth">Environment</th>
+								<th class="sth">{{ server.environment }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Server Name</th>
+								<th class="sth">{{ server.server_name }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Response Type</th>
+								<th class="sth">{{ server.response_header }}</th>
+							</tr>
+							<tr>
+								<th class="sth">VAC Secured</th>
+								<th class="sth">{{ server.vac_secured }}</th>
+
+							</tr>
+							<tr>
+								<th class="sth">Server Type</th>
+								<th class="sth">{{ server.server_type }}</th>
+							</tr>
+						</table>
+					</div>
+					<div class ="playerinfo"> 
+						{% if player_list %}
+							<table class="tablu">
+								<tr class="headertr pth">
+									<th class="headertr pth">Name</th>
+									<th class="headertr pth">Score</th>
+									<th class="headertr pth">Duration</th>
+								</tr>
+								{% for player in player_list %}
+								<tr>
+									<th class="pth">{{ player.name }}</th>
+									<th class="pth">{{ player.score }}</th>
+									<th class="pth">{{ player.duration }}</th>
+								</tr>
+								{% endfor %}
+						    </table>
+						{% else %}
+						    <p>No player is present.</p>
+						{% endif %}
+				    </div>
+				</div>
+			</a>
+			
+			
+			</div>
+		</div>
+		<div class="footer">
+		</div>
+	</div>
+</div>
+</body>
+</html>
