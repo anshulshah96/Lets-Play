@@ -167,7 +167,7 @@ class sendThread (threading.Thread):
 			base_ip = IP_BASE_ADDRESS_A+"."+str(i)+"."
 			for j in range (self.aylimits[0],self.aylimits[1]):
 				current_ip = base_ip + str(j)
-				logging.debug("Scanning "+ current_ip)
+				# logging.debug("Scanning "+ current_ip)
 				try:
 					self.udp.sendto(spacket.getvalue(),(current_ip, self.port))
 				except socket.error, msg:
@@ -176,6 +176,8 @@ class sendThread (threading.Thread):
 					else:
 						logging.info("Sender Error at ip "+ current_ip + " error: " + str(msg))
 					continue
+			time.sleep(0.1);
+			logging.debug("Scanned X " + str(i))
 		logging.info("Sender Thread Ended")
 
 class receiverThread (threading.Thread):

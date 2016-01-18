@@ -10,14 +10,14 @@ from serverlist.models import *
 import logging
  
 UDP_PORT = 27015
-axlimits = [1,255]
+axlimits = [1,32]
 aylimits = [1,255]
 nslist = []
 tplist = []
 SLEEP_TIME = 10
 
 class MyAppConfig(AppConfig):
-	logging.basicConfig(level=logging.ERROR)
+	logging.basicConfig(level=logging.INFO)
 	name = 'serverlist'
 	verbose_name = "My Application"
 	def ready(self):
@@ -30,7 +30,7 @@ class MyAppConfig(AppConfig):
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 5.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 10.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 				    server_list = scanner.getServerList()
 				    for info_elements in server_list:
@@ -52,7 +52,7 @@ class MyAppConfig(AppConfig):
 						    new_player.server_name = new_server.ip
 						    tplist.append(new_player)
 						info = info_elements['host_ip'] + " " + info_elements['header'] + " found: " + info_elements['map']
-						logging.debug(info)
+						# logging.debug(info)
 				    Server.objects.all().delete()
 				    PlayerTemp.objects.all().delete()
 				    for serv in nslist:
