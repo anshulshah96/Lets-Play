@@ -7,6 +7,6 @@ Django based app for showing the list of the CS servers within the IIT-R campus
 ## Setup
 1. Install Python2, Django==1.7.8 and mysql-python (preferably in a virtual env).
 2. Create a new DB in mysql and a new user having full access to that DB.
-3. Copy LPapp/connections.py.sample to LPapp/connections.py provide the DB and user details.
+3. Copy LPapp/configuration.py.sample to LPapp/configuration.py provide the DB and user details.
 4. Run ./manage.py migrate.
 5. Run ./manage.py runserver

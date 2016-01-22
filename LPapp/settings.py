@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import connections
+import configuration
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -22,9 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'mc+w(=%disq6)#q5)6u2$y9l8ouyn5+$l7x)7v@gs8i3zh9%7#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = configuration.debug
 TEMPLATE_DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = configuration.allowed_hosts
 
 
 # Application definition
@@ -60,11 +60,11 @@ WSGI_APPLICATION = 'LPapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': connections.db,
-    'USER':connections.user,
-    'PASSWORD':connections.password,
-    'HOST':connections.host,
-    'port':connections.port,
+        'NAME': configuration.db,
+    'USER':configuration.user,
+    'PASSWORD':configuration.password,
+    'HOST':configuration.host,
+    'port':configuration.port,
     'OPTIONS': {
          "init_command": "SET foreign_key_checks = 0;",
     },

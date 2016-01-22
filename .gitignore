@@ -2,6 +2,7 @@
 db.sqlite3
 script.sql
 LPapp/connections.py
+LPapp/configuration.py
 screenshots/
 serverlist/migrations/
 

@@ -1,5 +1,8 @@
 db = 'letsplay'
 user = 'letsplay'
-password = '1234##$$'
+password = 'password'
 host = 'localhost'
 port = 3306
+
+debug = False
+allowed_hosts = ['*']
