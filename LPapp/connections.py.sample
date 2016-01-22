@@ -1,0 +1,5 @@
+db = 'letsplay'
+user = 'letsplay'
+password = '1234##$$'
+host = 'localhost'
+port = 3306

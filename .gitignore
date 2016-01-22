@@ -4,3 +4,10 @@ script.sql
 LPapp/connections.py
 screenshots/
 serverlist/migrations/
+
+#For using virtualenv:
+bin/
+local/
+lib/
+include/
+pip-selfcheck.json
