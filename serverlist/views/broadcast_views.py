@@ -3,8 +3,10 @@ from django.http import HttpResponse, Http404
 from django.template import RequestContext, loader
 import json
 from serverlist.models import *
+from django.views.decorators.cache import cache_page
 
 # @csrf_exempt
+@cache_page(20)
 def serverlist_json(request):
 	latest_server_list = Server.objects.all()
 	json_object = json.dumps([server.dumps() for server in latest_server_list])
@@ -12,6 +14,7 @@ def serverlist_json(request):
 	return HttpResponse(json_object, content_type='application/json')
 
 # @csrf_exempt
+@cache_page(20)
 def ip_details_json(request,server_id):
 	server_id = server_id.replace("_",".")
 	try:

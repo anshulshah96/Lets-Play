@@ -2,10 +2,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 import logging
-
 from serverlist.models import *
+from django.views.decorators.cache import cache_page
 
-
+@cache_page(20)
 def index(request):
 	latest_server_list = Server.objects.all()
 	logging.debug(latest_server_list)
@@ -16,8 +16,8 @@ def index(request):
 
 def home(request):
 	return redirect("/serverlist/")
-	# return HttpResponse("You're at the home page.")
 
+@cache_page(20)
 def ip_details(request,server_id):
 	server_id = server_id.replace("_",".")
 	server = get_object_or_404(Server, ip = server_id)

@@ -218,7 +218,7 @@ class receiverThread (threading.Thread):
 			logging.error("KeyboardInterrupt exiting...")	
 			sys.exit(0)
 		else:
-			logging.info("Data received from" + str(addr))
+			logging.debug("Data received from" + str(addr))
 			packet = SourceQueryPacket(data)
 			typ = packet.getLong()
 
