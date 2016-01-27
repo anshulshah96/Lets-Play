@@ -17,7 +17,7 @@ tplist = []
 SLEEP_TIME = 10
 
 class MyAppConfig(AppConfig):
-	logging.basicConfig(level=logging.INFO)
+	logging.basicConfig(level=logging.ERROR)
 	name = 'serverlist'
 	verbose_name = "My Application"
 	def ready(self):
