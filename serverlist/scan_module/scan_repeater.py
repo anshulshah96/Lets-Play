@@ -13,6 +13,7 @@ axlimits = [1,35]
 aylimits = [1,255]
 nslist = []
 tplist = []
+old_player_list = []
 SLEEP_TIME = 10
 
 def update_leaderboard(player_obj):
@@ -22,10 +23,13 @@ def update_leaderboard(player_obj):
 		new_player_regitered = Player(name = player_obj.name, duration = player_obj.duration, score = player_obj.score)
 		new_player_regitered.update_ratio()
 		logging.info("New player: " + new_player_regitered.name)
+		new_player_regitered.save()
 	else:
-		player_query[0].score = player_query[0].score + player_obj.score
-		player_query[0].duration = player_query[0].duration + player_obj.duration
-		player_query[0].update_ratio()
+		player_update = player_query[0]
+		player_update.score = player_update.score + player_obj.score
+		player_update.duration = player_update.duration + player_obj.duration
+		player_update.update_ratio()
+		player_update.save()
 		logging.info("LB update for: " + player_obj.name)
 	return
 
@@ -63,8 +67,8 @@ def update_server_list(new_server_list):
 def update_player_list(new_player_list):
 	old_player_list = PlayerTemp.objects.all()
 
-	for player in new_player_list:
-		logging.debug("OLD Found: " + player['name'] + ' in ' + player['server_obj'].ip)
+	for player in old_player_list:
+		logging.debug("OLD Found: " + player.name + ' in ' + player.server.ip)
 
 	checklist = []
 
@@ -84,7 +88,6 @@ def update_player_list(new_player_list):
 	for player_obj in old_player_list:
 		if not (player_obj.name,player_obj.server) in checklist:
 			update_leaderboard(player_obj)
-			# logging.info("update for : " + player_obj.name)
 			player_obj.delete()
 
 
@@ -97,39 +100,21 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 10.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 15.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 
 				    new_server_list = scanner.getServerList()
-				    update_server_list(new_server_list)
-
-				  #   #Creating all the objects of new found servers
-				  #   for server_obj in server_list:
-						# new_server = update_server_obj(server_obj)
-						# nslist.append(new_server)
-
-						# #finding the players in new_servers
-						# player_query = PlayerQuery(server_obj['host_ip'],UDP_PORT)
-						# player_list = player_query.player()
-						# for player in player_list:
-						#     new_player.server_name = new_server.ip
-						#     tplist.append(new_player)
-						
-						# # info = server_obj['host_ip'] + " " + server_obj['header'] + " found: " + server_obj['map']
-						# # logging.debug(info)
-
-				    # Server.objects.all().delete()
-				    # PlayerTemp.objects.all().delete()
 
 				    nslist = Server.objects.all()
 				    for serv in nslist:
 				    	player_query = PlayerQuery(serv.ip,UDP_PORT)
 				    	player_list = player_query.player()
 				    	for player in player_list:
-						    # new_player = PlayerTemp(score = player['score'], name = player['name'], duration = player['duration'])
 						    player['server_obj'] = serv
 						    tplist.append(player)
+				    
 				    update_player_list(tplist)
+				    update_server_list(new_server_list)
 
 				except KeyboardInterrupt:
 					logging.info(str(len(nslist)) + " servers found exiting...")

@@ -9,7 +9,7 @@ class Player(models.Model):
 		return self.name
 	def update_ratio(self):
 		# ratio = (self.score/(1+ (duration)/100 ))
-		# ratio = self.score
+		ratio = self.score
 		return
 class Server(models.Model):
 	ip = models.CharField(max_length=200)			#Ex. 172.25.12.131

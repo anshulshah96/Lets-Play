@@ -12,7 +12,7 @@ class MyAppConfig(AppConfig):
 	verbose_name = "My Application"
 	def ready(self):
 		try:
-			# thread.start_new_thread(scan_repeater.continuous_scan,())
+			thread.start_new_thread(scan_repeater.continuous_scan,())
 			pass
 		except Exception, e:
 			logging.exception(str(e))
