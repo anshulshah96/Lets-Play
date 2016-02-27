@@ -1,7 +1,9 @@
 import socket, struct, sys, time
 import StringIO
 import logging
-from serverlist.maplib import *
+
+from source_packet import *
+
 PACKETSIZE=1400
 
 WHOLE=-1
