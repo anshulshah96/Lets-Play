@@ -5,19 +5,9 @@ import logging
 
 from source_packet import *
 
-
 PACKETSIZE=1400
 WHOLE=-1
 SPLIT=-2
-
-A2S_INFO = ord('T')
-A2S_INFO_STRING = 'Source Engine Query'
-A2S_INFO_REPLY_OLD = ord('m')
-A2S_INFO_REPLY_NEW = ord('I')
-A2S_PLAYER = ord('U')
-A2S_PLAYER_REPLY = ord('D')
-CHALLENGE = -1
-S2C_CHALLENGE = ord('A')
 
 IP_BASE_ADDRESS_A = "172.25"
 

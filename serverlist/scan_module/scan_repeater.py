@@ -15,6 +15,79 @@ nslist = []
 tplist = []
 SLEEP_TIME = 10
 
+def update_leaderboard(player_obj):
+	player_query = Player.objects.filter(name = player_obj.name)
+
+	if len(player_query) == 0:
+		new_player_regitered = Player(name = player_obj.name, duration = player_obj.duration, score = player_obj.score)
+		new_player_regitered.update_ratio()
+		logging.info("New player: " + new_player_regitered.name)
+	else:
+		player_query[0].score = player_query[0].score + player_obj.score
+		player_query[0].duration = player_query[0].duration + player_obj.duration
+		player_query[0].update_ratio()
+		logging.info("LB update for: " + player_obj.name)
+	return
+
+def update_server_list(new_server_list):
+	old_server_list = Server.objects.all()
+
+	checklist = []
+	for server_obj in new_server_list:
+		new_dictionary = {
+			'map_name' : server_obj['map'],
+			'host' : server_obj['host_ip'],				'num_players' : server_obj['numplayers'],
+			'max_players' : server_obj['maxplayers'], 	'server_name' : server_obj['name'],
+			'game_name' : server_obj['game'],			'folder' : server_obj['folder'],
+			'protocol' : server_obj['protocol'],		'num_bots' : server_obj['bots'],
+			'num_humans' : server_obj['numplayers'] - server_obj['bots']
+		}
+		obj, created = Server.objects.update_or_create(ip = server_obj['host_ip'], defaults = new_dictionary)
+		checklist.append(obj.ip)
+
+		if created:
+			logging.debug("Created: " + obj.ip)
+			obj.set_server_type(server_obj['server_type'])
+			obj.set_environment(server_obj['environment'])
+			obj.set_password_protected(server_obj['password'])
+			# obj.set_vac_secured(server_obj['vac'])
+			obj.set_header_response(server_obj['header'])
+		else:
+			logging.debug("Present: " + obj.ip)
+
+	for server_obj in old_server_list:
+		if not server_obj.ip in checklist:
+			logging.debug("Deleting: " + server_obj.ip)
+			server_obj.delete()
+
+def update_player_list(new_player_list):
+	old_player_list = PlayerTemp.objects.all()
+
+	for player in new_player_list:
+		logging.debug("OLD Found: " + player['name'] + ' in ' + player['server_obj'].ip)
+
+	checklist = []
+
+	for player_obj in new_player_list:
+		new_dictionary = {
+			'score' : player_obj['score'], 'duration' : player_obj['duration']
+		}
+		obj, created = PlayerTemp.objects.update_or_create(server = player_obj['server_obj'], name = player_obj['name'], defaults = new_dictionary)
+		
+		checklist.append((obj.name,obj.server))
+
+		if created:
+			logging.debug("Created Player: " + obj.name)
+		else:
+			logging.debug("Present Player: " + obj.name)
+
+	for player_obj in old_player_list:
+		if not (player_obj.name,player_obj.server) in checklist:
+			update_leaderboard(player_obj)
+			# logging.info("update for : " + player_obj.name)
+			player_obj.delete()
+
+
 def continuous_scan():
 			global nslist
 			global tplist
@@ -24,37 +97,40 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 15.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 10.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
-				    server_list = scanner.getServerList()
-				    for info_elements in server_list:
-						new_server = Server(ip = info_elements['host_ip'],map_name = info_elements['map'],host = info_elements['host_ip'],
-										num_players = info_elements['numplayers'],max_players = info_elements['maxplayers'],
-										server_name = info_elements['name'],game_name = info_elements['game'],folder = info_elements['folder'],
-										protocol = info_elements['protocol'],num_bots = info_elements['bots'],
-										num_humans = info_elements['numplayers'] - info_elements['bots'])
-						new_server.set_server_type(info_elements['server_type'])
-						new_server.set_environment(info_elements['environment'])
-						new_server.set_password_protected(info_elements['password'])
-						# new_server.set_vac_secured(info_elements['vac'])
-						new_server.set_header_response(info_elements['header'])
-						nslist.append(new_server)
-						server = SourceQuery(info_elements['host_ip'],UDP_PORT)
-						player_list = server.player()
-						for player in player_list:
-						    new_player = PlayerTemp(score = player['score'], name = player['name'], duration = player['duration'])
-						    new_player.server_name = new_server.ip
-						    tplist.append(new_player)
-						info = info_elements['host_ip'] + " " + info_elements['header'] + " found: " + info_elements['map']
-						# logging.debug(info)
-				    Server.objects.all().delete()
-				    PlayerTemp.objects.all().delete()
+
+				    new_server_list = scanner.getServerList()
+				    update_server_list(new_server_list)
+
+				  #   #Creating all the objects of new found servers
+				  #   for server_obj in server_list:
+						# new_server = update_server_obj(server_obj)
+						# nslist.append(new_server)
+
+						# #finding the players in new_servers
+						# player_query = PlayerQuery(server_obj['host_ip'],UDP_PORT)
+						# player_list = player_query.player()
+						# for player in player_list:
+						#     new_player.server_name = new_server.ip
+						#     tplist.append(new_player)
+						
+						# # info = server_obj['host_ip'] + " " + server_obj['header'] + " found: " + server_obj['map']
+						# # logging.debug(info)
+
+				    # Server.objects.all().delete()
+				    # PlayerTemp.objects.all().delete()
+
+				    nslist = Server.objects.all()
 				    for serv in nslist:
-						serv.save()
-						for player in tplist:
-							if player.server_name == serv.ip:
-								player.server = serv
-								player.save()
+				    	player_query = PlayerQuery(serv.ip,UDP_PORT)
+				    	player_list = player_query.player()
+				    	for player in player_list:
+						    # new_player = PlayerTemp(score = player['score'], name = player['name'], duration = player['duration'])
+						    player['server_obj'] = serv
+						    tplist.append(player)
+				    update_player_list(tplist)
+
 				except KeyboardInterrupt:
 					logging.info(str(len(nslist)) + " servers found exiting...")
 					sys.exit(0)

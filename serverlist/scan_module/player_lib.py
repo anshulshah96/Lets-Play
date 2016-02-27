@@ -17,7 +17,7 @@ A2S_PLAYER_REPLY = ord('D')
 CHALLENGE = -1
 S2C_CHALLENGE = ord('A')
 
-class SourceQuery(object):
+class PlayerQuery(object):
     """Example usage:
        import SourceQuery
        server = SourceQuery.SourceQuery('1.2.3.4', 27015)

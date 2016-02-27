@@ -4,9 +4,13 @@ class Player(models.Model):
 	name = models.CharField(max_length=200)
 	duration = models.IntegerField(default=0)
 	score = models.IntegerField(default=0)
+	ratio = models.IntegerField(default = 100)
 	def __str__(self):
 		return self.name
-
+	def update_ratio(self):
+		# ratio = (self.score/(1+ (duration)/100 ))
+		# ratio = self.score
+		return
 class Server(models.Model):
 	ip = models.CharField(max_length=200)			#Ex. 172.25.12.131
 	map_name = models.CharField(max_length=200)		#Ex. rush
