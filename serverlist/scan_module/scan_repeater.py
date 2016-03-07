@@ -49,13 +49,16 @@ def update_server_list(new_server_list):
 		obj, created = Server.objects.update_or_create(ip = server_obj['host_ip'], defaults = new_dictionary)
 		checklist.append(obj.ip)
 
+		obj.set_server_type(server_obj['server_type'])
+		obj.set_environment(server_obj['environment'])
+		obj.set_password_protected(server_obj['password'])
+		print server_obj['host_ip'],server_obj['password']
+		# obj.set_vac_secured(server_obj['vac'])
+		obj.set_header_response(server_obj['header'])
+		obj.save()
+
 		if created:
 			logging.debug("Created: " + obj.ip)
-			obj.set_server_type(server_obj['server_type'])
-			obj.set_environment(server_obj['environment'])
-			obj.set_password_protected(server_obj['password'])
-			# obj.set_vac_secured(server_obj['vac'])
-			obj.set_header_response(server_obj['header'])
 		else:
 			logging.debug("Present: " + obj.ip)
 

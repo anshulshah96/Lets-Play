@@ -28,6 +28,6 @@ def ip_details(request,server_id):
 
 @cache_page(20)
 def leader_board(request):
-	leader_list = Player.objects.all().order_by("-score")[0:5]
+	leader_list = Player.objects.all().order_by("-score")[0:10]
 	context = {'leader_list': leader_list}
 	return render(request,'serverlist/leaderboard.html',context)
