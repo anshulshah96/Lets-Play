@@ -38,6 +38,9 @@ def update_server_list(new_server_list):
 
 	checklist = []
 	for server_obj in new_server_list:
+		if not 'map' in server_obj:
+			logging.error("server_obj scanned has no map" + str(server_obj))
+			continue
 		new_dictionary = {
 			'map_name' : server_obj['map'],
 			'host' : server_obj['host_ip'],				'num_players' : server_obj['numplayers'],
@@ -52,7 +55,6 @@ def update_server_list(new_server_list):
 		obj.set_server_type(server_obj['server_type'])
 		obj.set_environment(server_obj['environment'])
 		obj.set_password_protected(server_obj['password'])
-		print server_obj['host_ip'],server_obj['password']
 		# obj.set_vac_secured(server_obj['vac'])
 		obj.set_header_response(server_obj['header'])
 		obj.save()
@@ -93,7 +95,6 @@ def update_player_list(new_player_list):
 			update_leaderboard(player_obj)
 			player_obj.delete()
 
-
 def continuous_scan():
 			global nslist
 			global tplist
@@ -103,7 +104,7 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 15.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 10.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 
 				    new_server_list = scanner.getServerList()
@@ -111,6 +112,7 @@ def continuous_scan():
 				    nslist = Server.objects.all()
 				    for serv in nslist:
 				    	player_query = PlayerQuery(serv.ip,UDP_PORT)
+				    	player_query.host = serv.ip
 				    	player_list = player_query.player()
 				    	for player in player_list:
 						    player['server_obj'] = serv

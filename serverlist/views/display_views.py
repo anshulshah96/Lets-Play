@@ -11,9 +11,13 @@ def index(request):
 	logging.debug(latest_server_list)
 	for server in latest_server_list:
 		server.link = server.ip.replace(".","_")
-	context = {'latest_server_list': latest_server_list}
+	leader_list_score = Player.objects.all().order_by("-score")[0:5]
+	leader_list_duration = Player.objects.all().order_by("-duration")[0:5]
+	context = {'latest_server_list': latest_server_list , 'leader_list_score': leader_list_score, 
+				'leader_list_duration': leader_list_duration}
 	return render(request,'serverlist/index.html',context)
 
+@cache_page(20)
 def home(request):
 	return redirect("/serverlist/")
 
@@ -25,9 +29,3 @@ def ip_details(request,server_id):
 	logging.debug(player_list)
 	context = {'player_list': player_list,'server':server}
 	return render(request,'serverlist/playerlist.html',context)
-
-@cache_page(20)
-def leader_board(request):
-	leader_list = Player.objects.all().order_by("-score")[0:10]
-	context = {'leader_list': leader_list}
-	return render(request,'serverlist/leaderboard.html',context)

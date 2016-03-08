@@ -24,7 +24,7 @@ class PlayerQuery(object):
        print server.player()
     """
 
-    def __init__(self, host, port=27015, timeout=1.0):
+    def __init__(self, host, port=27015, timeout=3.0):
         self.host = host
         self.port = port
         self.timeout = timeout
@@ -101,8 +101,6 @@ class PlayerQuery(object):
             return challenge
 
     def player(self):
-
-
         # now obtain the actual player info
         try:
             challenge = self.connect(True)
@@ -113,9 +111,10 @@ class PlayerQuery(object):
         except KeyboardInterrupt:
             logging.error("KeyboardInterrupt exiting...")   
             sys.exit(0)
+            return []
         except Exception, e:
             logging.error("Error while player query for " + self.host)
-            # logging.error(str(e))
+            logging.error(str(e))
             return []
         else:
             self.udp.send(packet.getvalue())

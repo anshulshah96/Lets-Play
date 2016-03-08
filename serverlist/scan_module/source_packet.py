@@ -117,7 +117,7 @@ class SourceQueryPacket(StringIO.StringIO):
 			try:
 				for x in xrange(numplayers):
 				    player = {}
-				    player['ip'] = self.gethost
+				    player['ip'] = self.host
 				    player['index'] = self.getByte()
 				    player['name'] = self.getString()
 				    player['score'] = self.getLong()

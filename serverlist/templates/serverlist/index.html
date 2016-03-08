@@ -11,25 +11,36 @@
 			margin: 0;
 			color: #333;
 		}
-		.main{
-			width: 950px;
-			padding: 0;
-			background-color: #fff;
-			margin: 0 auto;
-			border-left:  1px solid #ddd;
-			border-right:  1px solid #ddd;
-			min-height: 100%;
-		}
 		.banner{
 			text-align: center;
 			font-size: 60px;
 			font-weight: 100;
-			padding-top: 50px;
-			padding-bottom: 40px;
+			padding-top: 30px;
+			padding-bottom: 30px;
+			margin: 10;
+			border-left:  2px solid #ddd;
+			border-right:  2px solid #ddd;
+			border-top:  2px solid #ddd;
+			border-bottom:  2px solid #ddd;
+			background-color: #fff;
 		}
-		.content{
+		.list{
+			float: left;
 			width: 900px;
-			margin: 0 auto;
+			padding: 0;
+			background-color: #fff;
+			margin: 10;
+			min-height: 100%;
+			border-left:  2px solid #ddd;
+			border-right:  2px solid #ddd;
+			border-top:  2px solid #ddd;
+			border-bottom:  2px solid #ddd;
+		}
+		.listheader{
+			text-align: center;
+			font-size: 40px;
+			font-weight: 100;
+			margin: 10;
 		}
 		.playerslink{
 			text-decoration: none;
@@ -74,49 +85,136 @@
 			font-size: 20px;
 			font-weight: 200;
 		}
+		.leaderboard{
+			float: right;
+			width: 400px;
+			padding: 0;
+			background-color: #fff;
+			margin: 10;
+			border-left:  2px solid #ddd;
+			border-right:  2px solid #ddd;
+			border-top:  2px solid #ddd;
+			border-bottom:  2px solid #ddd;
+			min-height: 100%;
+		}
+		.leaderboardheader{
+			text-align: center;
+			font-size: 40px;
+			font-weight: 100;
+			margin: 10;
+		}
+		.scorebased{
+			margin: 3px auto;
+		}
+		.durationbased{
+			margin: 3px auto;
+		}
+		.title{
+			text-align: center;
+			font-family: 'Roboto',sans-serif;
+			font-size: 30px;
+		}
+		.leaderentry{
+			color: #333;
+			text-align: left;
+			font-family: 'Roboto',sans-serif;
+			font-weight: 300;
+			background-color: #fafafa;
+			border-radius: 6px;
+			border:  1px solid #ddd;
+			margin: 3px auto;
+			padding: 4px;
+			font-size: 20px;
+		}
 		.footer{
 			height: 20px;
 		}
 	</style>
 </head>
+
 <body>
-<div class="main">
 	<div class="banner">
 		Let's Play
 	</div>
-	<div class="middle">
-		<div class="content">
-			{% if latest_server_list %}
-			{% for server in latest_server_list %}
-			<a class="playerslink" href="{{ server.link }}/">
-				<div class="entry {{ server.password_protected }}">
- 					<div class="ip">
-						{{ server.server_name }} ({{ server.ip }})
+
+	<div class="list">
+		<div class="listheader">
+			List of Active Servers
+		</div>
+
+		{% if latest_server_list %}
+		{% for server in latest_server_list %}
+		<a class="playerslink"   href="{{ server.link }}/">
+			<div class="entry {{ server.password_protected }}" >
+				<div class="ip">
+					{{ server.server_name }} ({{ server.ip }})
+				</div>
+				<div class="specrow">
+					<div class="spec game">
+						Game: {{ server.game_name }} ({{ server.protocol }})
 					</div>
-					<div class="specrow">
-						<div class="spec game">
-							Game: {{ server.game_name }} ({{ server.protocol }})
-						</div>
-						<div class="spec map">
-							Map: {{ server.map_name }}
-						</div>
-						<div class="spec players">
-							{{ server.num_humans }} Players + {{ server.num_bots }} Bots
-						</div>
+					<div class="spec map">
+						Map: {{ server.map_name }}
+					</div>
+					<div class="spec players">
+						{{ server.num_humans }} Players + {{ server.num_bots }} Bots
 					</div>
 				</div>
-			</a>
+			</div>
+		</a>
+		{% endfor %}
+		{% else %}
+		<div class="entry {{ server.password_protected }}">
+			<div class="ip">
+				No servers could be found.
+			</div>{% endif %}
+		</div>
+
+	</div>
+
+	<div class="leaderboard">
+		<div class="leaderboardheader">
+			Leader Board
+		</div>
+
+		<div class = "scorebased">
+			<div class="title">
+				Name (Score)
+			</div>
+			{% if leader_list_score %}
+			{% for player in leader_list_score %}
+				<div class="leaderentry">
+					{{ player.name }} 			({{ player.score }})
+				</div>
 			{% endfor %}
 			{% else %}
-			<div class="entry {{ server.password_protected }}">
-				<div class="ip">
-					No servers could be found.
-				</div>{% endif %}
+				<div class="leaderentry">
+					No Player till now.
+				</div>
+			{% endif %}
+		</div>
+
+		<div class = "durationbased">
+			<div class="title">
+				Name (Duration)
 			</div>
+			{% if leader_list_duration %}
+			{% for player in leader_list_duration %}
+				<div class="leaderentry">
+					{{ player.name }} 			({{ player.duration }})
+				</div>
+			{% endfor %}
+			{% else %}
+				<div class="leaderentry">
+					No Player till now.
+				</div>
+			{% endif %}
 		</div>
-		<div class="footer">
-		</div>
+			
 	</div>
-</div>
+
+	<div class="footer">
+	</div>
 </body>
+
 </html>

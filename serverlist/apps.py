@@ -12,12 +12,6 @@ class MyAppConfig(AppConfig):
 	name = 'serverlist'
 	verbose_name = "My Application"
 	def ready(self):
-
-		# One Time Update LeaderBoard
-		# leader_list = Player.objects.all()
-		# for player in leader_list:
-		# 	player.update_ratio()
-
 		try:
 			thread.start_new_thread(scan_repeater.continuous_scan,())
 			pass
