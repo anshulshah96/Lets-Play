@@ -1,0 +1,98 @@
+{% load staticfiles %}
+body{
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+.banner{
+	background-color: #2980b9;
+	background : rgba(41, 128, 185, 1);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.display{
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	overflow:hidden;
+}
+.content{
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 40px;
+	margin-top: 40px;
+	min-height: 100%;
+	border-radius: 15px;
+	/*opacity: 0.5;*/
+	background: rgba(0, 0, 0, 0.5);
+	min-height: 70%;
+}
+.serverinfo{
+	margin-top: 20px;
+	margin-left: 40px;
+	margin-right: 20px;
+	font-weight: 300;
+	line-height: 24px;
+	display: inline-block;
+	width: 30%;
+	vertical-align: top;
+}
+.playerinfo{
+	width: 60%;
+	padding: 10px;
+	font-weight: 300;
+	margin-bottom: 60px;
+	opacity: 0.5;
+	/*background: rgba(0, 0, 0, 0.5);*/
+	display: inline-block;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+	background-color: #ffffff;
+	min-height: 70%;
+}
+hr { 
+    display: block;
+    margin-top: 0.0em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 2px;
+}
+table{
+	width: 100%;	
+}
+.entry{
+	font-family: 'Roboto',sans-serif;
+	font-weight: 300;
+	padding: 20px;
+}
+.ip{
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	margin-top: 10px;
+}
+.pth{
+	font-size: 20px;
+	padding-bottom: 12px;
+	font-weight: 300;
+}
+.headertr{
+	font-size: 20px;
+	font-weight: 300;
+	padding-top: 16px;
+}
+.sth{
+	color: white;
+	font-weight: bold;
+	text-align: left;
+	font-weight: 200;
+	font-size: 20px;
+}
+.playerslink{
+	text-decoration: none;
+	color: black;
+}

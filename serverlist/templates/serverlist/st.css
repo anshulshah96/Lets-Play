@@ -1,0 +1,118 @@
+<style>
+		body{
+			height: 100%;
+			background-color: #fafafa;
+			font-family: 'Roboto', sans-serif;
+			padding: 0;
+			margin: 0;
+			color: #333;
+		}
+		.main{
+			width: 950px;
+			padding: 0;
+			background-color: #fff;
+			margin: 0 auto;
+			border-left:  1px solid #ddd;
+			border-right:  1px solid #ddd;
+			min-height: 100%;
+		}
+		.banner{
+			text-align: center;
+			font-size: 60px;
+			font-weight: 100;
+			padding-top: 50px;
+			padding-bottom: 40px;
+		}
+		.content{
+			width: 900px;
+			margin: 0 auto;
+		}
+		.playerslink{
+			text-decoration: none;
+			color: black;
+		}
+		.entry.Yes{
+			background-color: #fff3f3;
+		}
+		.entry{
+			color: #333;
+			font-family: 'Roboto',sans-serif;
+			font-weight: 300;
+			width: 800px;
+			
+			background-color: #fafafa;
+			border-radius: 6px;
+			border:  1px solid #ddd;
+			margin: 20px auto;
+			padding: 20px;
+			font-size: 16px;
+		}
+		.specrow{
+			padding: 5px 0;
+			width: 100%;
+		}
+		.spec{
+			display: inline-block;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.game{
+			width: 46%;
+		}
+		.map{
+			width: 34%;
+		}
+		.players{
+			width: 18%;
+		}
+		.ip{
+			margin-bottom: 25px;
+			font-size: 20px;
+			font-weight: 200;
+		}
+		.pass{
+			font-size: 12px;
+			color: #ee4433;
+		}
+		.footer{
+			height: 20px;
+		}
+		table{
+			width: 100%;
+			
+			
+		}
+		
+
+		.pth{
+			font-size: 16px;
+			padding-bottom: 12px;
+			font-weight: 300;
+		}
+		.headertr{
+			font-size: 20px;
+			font-weight: 300;
+			padding-top: 16px;
+		}
+		.serverinfo{
+			margin-top: 20px;
+			margin-right: 20px;
+			line-height: 24px;
+			display: inline-block;
+			width: 30%;
+			vertical-align: top;
+		}
+		.playerinfo{
+			
+			width: 60%;
+			padding: 10px;
+			display: inline-block;
+			border-radius: 6px;
+			border: 1px solid #ddd;
+			background-color: #ffffff;
+		}
+		.sth{
+			text-align: left;
+			font-weight: 200;
+		}
+	</style>

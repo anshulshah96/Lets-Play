@@ -122,6 +122,8 @@ class SourceQueryPacket(StringIO.StringIO):
 				    player['name'] = self.getString()
 				    player['score'] = self.getLong()
 				    player['duration'] = self.getFloat()
+				    if player['duration'] < 0:		#For handling some exceptional responses
+				    	player['duration'] = 0
 				    player_list.append(player)
 	  		except Exception, msg:
 				logging.error(str(msg))

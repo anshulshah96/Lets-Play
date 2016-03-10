@@ -1,0 +1,132 @@
+{% load staticfiles %}
+body{
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+.banner{
+	background-color: #2980b9;
+	background : rgba(41, 128, 185, 1);
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.display{
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	overflow:hidden;
+}
+.list{
+	float: left;
+	width: 800px;
+	min-height: 100%;
+	margin-left: 40px;
+}
+.leaderboard{
+	float: right;
+	width: 400px;
+	margin-right: 70px;
+	min-height: 100%;
+}
+
+.listheader{
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	margin-top: 40; 
+}
+.title{
+	color: white;
+	text-align: center;
+	font-family: 'Roboto',sans-serif;
+	margin-top: 40; 
+	font-size: 30px;
+}
+.entry.Yes{
+	background-color: #7b949c;
+}
+.entry{
+	color: white;
+	font-size: 16px;
+	font-family: 'Roboto',sans-serif;
+	background-color: #173339;
+	/*opacity: 0.47;*/
+	background: rgba(0, 0, 0, 0.5);
+	font-weight: 300;
+	width: 700px;
+	height: 65px;
+	border-radius: 15px;
+	margin: 0px auto;
+	margin-bottom: 10px;
+	padding: 20px;
+}
+.scorebased{
+	margin: 3px auto;
+}
+.durationbased{
+	margin: 3px auto;
+}
+.leaderentry{
+	color: white;
+	text-align: middle;
+	font-size: 20px;
+	font-family: 'Roboto',sans-serif;
+	font-weight: 300;
+	background-color: #3d5a64;
+	/*opacity: 0.47;*/
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+	margin: 0px auto;
+	margin-bottom: 10px;
+	padding: 4px;
+}
+.name{
+	width: 50%;
+	float: left;
+	font-weight: bold;
+  	margin-left: 40px;
+}
+.score{
+
+}
+hr { 
+    display: block;
+    margin-top: 0.0em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 2px;
+}
+.playerslink{
+	text-decoration: none;
+	color: black;
+}
+.specrow{
+	padding: 5px 0;
+	width: 100%;
+}
+.spec{
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.game{
+	width: 46%;
+}
+.map{
+	width: 34%;
+}
+.players{
+	width: 18%;
+}
+.ip{
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 200;
+}
+.footer{
+}
+
