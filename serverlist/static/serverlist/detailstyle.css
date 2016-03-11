@@ -1,23 +1,4 @@
 {% load staticfiles %}
-body{
-	height: 100%;
-	font-family: 'Roboto', sans-serif;
-	margin: 0;
-}
-.banner{
-	background-color: #2980b9;
-	background : rgba(41, 128, 185, 1);
-	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.display{
-	background-image: url("images/background.jpg");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	overflow:hidden;
-}
 .content{
 	width: 1000px;
 	margin: 0 auto;
@@ -46,7 +27,6 @@ body{
 	background: rgba(0, 0, 1, 0.5);
 	display: inline-block;
 	border-radius: 6px;
-	border: 1px solid #ddd;
 	min-height: 70%;
 }
 hr { 
@@ -66,10 +46,11 @@ table{
 	padding: 20px;
 }
 .ip{
-	text-align: center;
+	text-align: left;
 	font-size: 30px;
 	color: white;
 	margin-top: 10px;
+	margin-left: 30px;
 }
 .pth{
 	color: white;

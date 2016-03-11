@@ -135,6 +135,8 @@ def continuous_scan():
 						    player['server_obj'] = serv
 						    if player['duration'] == -1:
 						    	player['duration'] = 0
+						    if player['score'] < 0:
+						    	player['score'] = 0
 						    player['duration'] /= 60 #duration is in minutes
 						    player['bot'] = check_bot(player['name'])
 

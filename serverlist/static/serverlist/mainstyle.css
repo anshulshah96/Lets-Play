@@ -1,30 +1,13 @@
 {% load staticfiles %}
-body{
-	height: 100%;
-	font-family: 'Roboto', sans-serif;
-	margin: 0;
-}
-.banner{
-	background-color: #2980b9;
-	background : rgba(41, 128, 185, 1);
-	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-.display{
-	background-image: url("images/background.jpg");
-	background-repeat: no-repeat;
-	background-size: 100%;
-	overflow:hidden;
-}
 .list{
+	font-family: 'Roboto',sans-serif;
 	float: left;
 	width: 700px;
 	min-height: 100%;
 	margin-left: 100px;
 }
 .leaderboard{
+	font-family: 'Roboto',sans-serif;
 	float: right;
 	width: 400px;
 	margin-right: 120px;
@@ -32,6 +15,7 @@ body{
 }
 
 .listheader{
+	font-family: 'Roboto',sans-serif;
 	text-align: center;
 	font-size: 30px;
 	color: white;
@@ -56,7 +40,7 @@ body{
 	/*opacity: 0.47;*/
 	background: rgba(0, 0, 0, 0.5);
 	font-weight: 300;
-	width: 650px;
+	width: 600px;
 	height: 65px;
 	border-radius: 15px;
 	margin: 0px auto;
@@ -88,6 +72,7 @@ body{
 	float: left;
 	font-weight: bold;
   	margin-left: 40px;
+	width: 45%;
 }
 .score{
 
@@ -121,13 +106,22 @@ hr {
 	width: 25%;
 }
 .players{
-	width: 24%;
+	width: 25%;
+}
+.iptitle{
+	width: 100%;
+	margin-bottom: 15px;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .ip{
-	margin-bottom: 10px;
-	font-size: 20px;
-	font-weight: 200;
+	width: 50%;
+	float: left;
+	font-weight: bold;
+	width: 45%;
 }
-.footer{
+.lockYes{
+	margin-right: 45px;
+	float: right;
 }
-

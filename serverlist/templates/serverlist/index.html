@@ -1,8 +1,11 @@
 <html>
 <head>
+	<div class="header">
+	</div>
 	<title> Let's Play</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
 	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mainstyle.css' %}" />
 </head>
 
@@ -53,16 +56,23 @@
 		</div>
 		<div class="list">
 			<div class="listheader">
-				List of Active Servers
+				Active Servers
 				<hr/>
 			</div>
 
 			{% if latest_server_list %}
 			{% for server in latest_server_list %}
 			<a class="playerslink"   href="{{ server.link }}/">
-				<div class="entry {{ server.password_protected }}" >
-					<div class="ip">
-						<b>{{ server.server_name }}</b> ({{ server.ip }})
+				<div class="entry {{ server.password_protected }}">
+					<div class = "iptitle">
+						<div class="ip">
+							<b>{{ server.server_name }}</b> ({{ server.ip }})
+						</div>
+						<div class = "lock{{ server.password_protected }}">
+							{% if server.password_protected == 'Yes' %}
+								<img src="{% static 'serverlist/images/lockhs.png' %}" width="30" height="30" alt = "Locked" align="middle">
+							{% endif %}
+						</div>
 					</div>
 					<div class="specrow">
 						<div class="spec game">
