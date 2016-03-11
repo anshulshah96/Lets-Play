@@ -111,6 +111,7 @@ class PlayerTemp(models.Model):
 	score = models.IntegerField(default=0)
 	duration = models.IntegerField(default=0)
 	name = models.CharField(max_length=200)
+	bot  = models.BooleanField(default=False)
 	def __str__(self):
 		return self.name
 	def dumps(self):

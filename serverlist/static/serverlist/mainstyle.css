@@ -20,14 +20,14 @@ body{
 }
 .list{
 	float: left;
-	width: 800px;
+	width: 700px;
 	min-height: 100%;
-	margin-left: 40px;
+	margin-left: 100px;
 }
 .leaderboard{
 	float: right;
 	width: 400px;
-	margin-right: 70px;
+	margin-right: 120px;
 	min-height: 100%;
 }
 
@@ -46,6 +46,7 @@ body{
 }
 .entry.Yes{
 	background-color: #7b949c;
+	background: rgba(0, 0, 0, 0.5);
 }
 .entry{
 	color: white;
@@ -55,7 +56,7 @@ body{
 	/*opacity: 0.47;*/
 	background: rgba(0, 0, 0, 0.5);
 	font-weight: 300;
-	width: 700px;
+	width: 650px;
 	height: 65px;
 	border-radius: 15px;
 	margin: 0px auto;
@@ -114,13 +115,13 @@ hr {
 	white-space: nowrap;
 }
 .game{
-	width: 46%;
+	width: 45%;
 }
 .map{
-	width: 34%;
+	width: 25%;
 }
 .players{
-	width: 18%;
+	width: 24%;
 }
 .ip{
 	margin-bottom: 10px;

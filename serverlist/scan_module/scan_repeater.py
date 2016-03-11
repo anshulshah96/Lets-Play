@@ -16,7 +16,18 @@ tplist = []
 old_player_list = []
 SLEEP_TIME = 10
 
+bot_suffix_list = []
+
+def check_bot(name):
+	for difficulty in bot_suffix_list:
+		for bot_name in difficulty:
+			if(name.endswith(bot_name)):
+				return True;
+	return False;
+
 def update_leaderboard(player_obj):
+	if player_obj.bot:
+		return
 	player_query = Player.objects.filter(name = player_obj.name)
 
 	if len(player_query) == 0:
@@ -79,7 +90,7 @@ def update_player_list(new_player_list):
 
 	for player_obj in new_player_list:
 		new_dictionary = {
-			'score' : player_obj['score'], 'duration' : player_obj['duration']
+			'score' : player_obj['score'], 'duration' : int(player_obj['duration'])	, 'bot' : player_obj['bot']
 		}
 		obj, created = PlayerTemp.objects.update_or_create(server = player_obj['server_obj'], name = player_obj['name'], defaults = new_dictionary)
 		
@@ -96,6 +107,12 @@ def update_player_list(new_player_list):
 			player_obj.delete()
 
 def continuous_scan():
+			keys = open('serverlist/scan_module/bot_names.txt')
+			for line in keys:
+			        names = line.replace("\t"," ").strip().split(" ");
+			        bot_suffix_list.append(names)
+			keys.close()
+
 			global nslist
 			global tplist
 			global axlimits
@@ -116,6 +133,11 @@ def continuous_scan():
 				    	player_list = player_query.player()
 				    	for player in player_list:
 						    player['server_obj'] = serv
+						    if player['duration'] == -1:
+						    	player['duration'] = 0
+						    player['duration'] /= 60 #duration is in minutes
+						    player['bot'] = check_bot(player['name'])
+
 						    tplist.append(player)
 				    
 				    update_player_list(tplist)

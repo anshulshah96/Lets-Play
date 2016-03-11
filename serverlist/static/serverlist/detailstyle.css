@@ -26,30 +26,27 @@ body{
 	min-height: 100%;
 	border-radius: 15px;
 	/*opacity: 0.5;*/
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.3);
 	min-height: 70%;
 }
 .serverinfo{
 	margin-top: 20px;
 	margin-left: 40px;
 	margin-right: 20px;
-	font-weight: 300;
 	line-height: 24px;
 	display: inline-block;
 	width: 30%;
 	vertical-align: top;
 }
 .playerinfo{
+	color: white;
 	width: 60%;
 	padding: 10px;
-	font-weight: 300;
 	margin-bottom: 60px;
-	opacity: 0.5;
-	/*background: rgba(0, 0, 0, 0.5);*/
+	background: rgba(0, 0, 1, 0.5);
 	display: inline-block;
 	border-radius: 6px;
 	border: 1px solid #ddd;
-	background-color: #ffffff;
 	min-height: 70%;
 }
 hr { 
@@ -66,7 +63,6 @@ table{
 }
 .entry{
 	font-family: 'Roboto',sans-serif;
-	font-weight: 300;
 	padding: 20px;
 }
 .ip{
@@ -76,21 +72,22 @@ table{
 	margin-top: 10px;
 }
 .pth{
+	color: white;
+	font-weight: 400;
 	font-size: 20px;
 	padding-bottom: 12px;
-	font-weight: 300;
 }
 .headertr{
+	color: white;
 	font-size: 20px;
-	font-weight: 300;
+	font-weight: 700;
 	padding-top: 16px;
 }
 .sth{
 	color: white;
-	font-weight: bold;
-	text-align: left;
-	font-weight: 200;
+	font-weight: 500;
 	font-size: 20px;
+	text-align: left;
 }
 .playerslink{
 	text-decoration: none;
