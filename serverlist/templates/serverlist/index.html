@@ -7,6 +7,7 @@
 	{% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mainstyle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
 </head>
 
 <body >
@@ -69,8 +70,7 @@
 							<b>{{ server.server_name }}</b> ({{ server.ip }})
 						</div>
 						<div class = "lock{{ server.password_protected }}">
-							{% if server.password_protected == 'Yes' %}
-								<img src="{% static 'serverlist/images/lockhs.png' %}" width="30" height="30" alt = "Locked" align="middle">
+							{% if server.password_protected == 'Yes' %}		<img src="{% static 'serverlist/images/lockhs.png' %}" width="30" height="30" alt = "Locked" align="middle">
 							{% endif %}
 						</div>
 					</div>
@@ -95,9 +95,33 @@
 				</div>{% endif %}
 			</div>
 		</div>
-		<div class="footer">
-		</div>
 	</div>
+
+	<footer class="footer-distributed">
+
+		<div class="footer-right">
+
+			<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
+			<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
+
+		</div>
+
+		<div class="footer-left">
+
+			<p class="footer-links">
+				<a href="/serverlist/">Home</a>
+				·
+				<a href="https://mobile.sdslabs.co/">Blog</a>
+				·
+				<a href="https://www.facebook.com/mdgiitr">About</a>
+				.
+				<a href="https://www.facebook.com/mdgiitr">Contact</a>
+			</p>
+
+			<p>Mobile Development Group IIT Roorkee &copy; 2016</p>
+		</div>
+
+	</footer>
 </body>
 
 </html>

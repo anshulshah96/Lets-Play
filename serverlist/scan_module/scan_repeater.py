@@ -48,9 +48,12 @@ def update_server_list(new_server_list):
 	old_server_list = Server.objects.all()
 
 	checklist = []
+
+
 	for server_obj in new_server_list:
 		if not 'map' in server_obj:
-			logging.error("server_obj scanned has no map" + str(server_obj))
+			logging.error("server_obj scanned has no map")
+			logging.info("server_obj: " + str(server_obj))
 			continue
 		new_dictionary = {
 			'map_name' : server_obj['map'],
@@ -76,7 +79,9 @@ def update_server_list(new_server_list):
 			logging.debug("Present: " + obj.ip)
 
 	for server_obj in old_server_list:
-		if not server_obj.ip in checklist:
+		if server_obj.num_players == 0:
+			server_obj.delete()
+		elif not server_obj.ip in checklist:
 			logging.debug("Deleting: " + server_obj.ip)
 			server_obj.delete()
 
@@ -97,9 +102,9 @@ def update_player_list(new_player_list):
 		checklist.append((obj.name,obj.server))
 
 		if created:
-			logging.debug("Created Player: " + obj.name)
+			logging.debug("Created Player: " + obj.name + "in" + player_obj['server_obj'].ip)
 		else:
-			logging.debug("Present Player: " + obj.name)
+			logging.debug("Present Player: " + obj.name + "in" + player_obj['server_obj'].ip)
 
 	for player_obj in old_player_list:
 		if not (player_obj.name,player_obj.server) in checklist:
@@ -121,7 +126,7 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 10.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 15.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 
 				    new_server_list = scanner.getServerList()
@@ -132,19 +137,16 @@ def continuous_scan():
 				    	player_query.host = serv.ip
 				    	player_list = player_query.player()
 				    	for player in player_list:
-						    player['server_obj'] = serv
-						    if player['duration'] == -1:
-						    	player['duration'] = 0
-						    if player['score'] < 0:
-						    	player['score'] = 0
-						    player['duration'] /= 60 #duration is in minutes
-						    player['bot'] = check_bot(player['name'])
-
-						    tplist.append(player)
-				    
+				    		player['server_obj'] = serv
+				    		if player['duration'] == -1:
+				    			player['duration'] = 0
+				    		if player['score'] < 0:
+				    		  	player['score'] = 0
+				    		player['duration'] /= 60 #duration is in minutes
+				    		player['bot'] = check_bot(player['name'])
+				    		tplist.append(player)
 				    update_player_list(tplist)
 				    update_server_list(new_server_list)
-
 				except KeyboardInterrupt:
 					logging.info(str(len(nslist)) + " servers found exiting...")
 					sys.exit(0)

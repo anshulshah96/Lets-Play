@@ -7,6 +7,7 @@
 	{% load staticfiles %}
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/detailstyle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
 </head>
 <body>
 <div class="main">
@@ -102,8 +103,31 @@
 		</div>
 	</div>
 
-	<div class="footer">
-	</div>
+	<footer class="footer-distributed">
+
+		<div class="footer-right">
+
+			<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
+			<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
+
+		</div>
+
+		<div class="footer-left">
+
+			<p class="footer-links">
+				<a href="/serverlist/">Home</a>
+				·
+				<a href="https://mobile.sdslabs.co/">Blog</a>
+				·
+				<a href="https://www.facebook.com/mdgiitr">About</a>
+				.
+				<a href="https://www.facebook.com/mdgiitr">Contact</a>
+			</p>
+
+			<p>Mobile Development Group IIT Roorkee &copy; 2016</p>
+		</div>
+
+	</footer>
 </div>
 </body>
 </html>
