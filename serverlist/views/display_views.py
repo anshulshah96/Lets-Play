@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 import logging
 from serverlist.models import *
+from django.shortcuts import render_to_response
 from django.views.decorators.cache import cache_page
 
 # @cache_page(20)
@@ -29,3 +30,15 @@ def ip_details(request,server_id):
 	logging.debug(player_list)
 	context = {'player_list': player_list,'server':server}
 	return render(request,'serverlist/playerlist.html',context)
+
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+def handler500(request):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response
