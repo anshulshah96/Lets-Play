@@ -28,6 +28,8 @@ def check_bot(name):
 def update_leaderboard(player_obj):
 	if player_obj.bot:
 		return
+	player_obj.clear_cache()
+	player_obj.save()
 	player_query = Player.objects.filter(name = player_obj.name)
 
 	if len(player_query) == 0:
@@ -49,11 +51,10 @@ def update_server_list(new_server_list):
 
 	checklist = []
 
-
 	for server_obj in new_server_list:
 		if not 'map' in server_obj:
-			logging.error("server_obj scanned has no map")
-			logging.info("server_obj: " + str(server_obj))
+			logging.debug("server_obj scanned has no map")
+			logging.debug("server_obj: " + str(server_obj))
 			continue
 		new_dictionary = {
 			'map_name' : server_obj['map'],
@@ -94,18 +95,28 @@ def update_player_list(new_player_list):
 	checklist = []
 
 	for player_obj in new_player_list:
+		#Getting old duration to check for map reset
+		old_duration = 0
+		old_score = 0
+		query_list = PlayerTemp.objects.all().filter(name = player_obj['name']).filter(server = player_obj['server_obj'])
+		if(len(query_list) > 0):
+			old_duration = query_list[0].duration
+			old_score = query_list[0].score
+
 		new_dictionary = {
 			'score' : player_obj['score'], 'duration' : int(player_obj['duration'])	, 'bot' : player_obj['bot']
 		}
-		obj, created = PlayerTemp.objects.update_or_create(server = player_obj['server_obj'], name = player_obj['name'], defaults = new_dictionary)
-		
+		obj, created = PlayerTemp.objects.update_or_create	(server = player_obj['server_obj'], name = player_obj['name'], defaults = new_dictionary)
 		checklist.append((obj.name,obj.server))
-
 		if created:
 			logging.debug("Created Player: " + obj.name + "in" + player_obj['server_obj'].ip)
 		else:
+			if obj.duration < old_duration:
+				obj.add_duration += old_duration
+				obj.add_score += old_score
+				obj.save()
+				logging.info("Caching:"+obj.name)
 			logging.debug("Present Player: " + obj.name + "in" + player_obj['server_obj'].ip)
-
 	for player_obj in old_player_list:
 		if not (player_obj.name,player_obj.server) in checklist:
 			update_leaderboard(player_obj)

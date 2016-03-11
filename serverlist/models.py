@@ -112,6 +112,8 @@ class PlayerTemp(models.Model):
 	duration = models.IntegerField(default=0)
 	name = models.CharField(max_length=200)
 	bot  = models.BooleanField(default=False)
+	add_duration = models.IntegerField(default=0)
+	add_score = models.IntegerField(default=0)
 	def __str__(self):
 		return self.name
 	def dumps(self):
@@ -120,3 +122,6 @@ class PlayerTemp(models.Model):
 			"score":self.score,
 			"duration":self.duration,
 		}
+	def clear_cache(self):
+		self.score += self.add_score
+		self.duration += self.add_duration
