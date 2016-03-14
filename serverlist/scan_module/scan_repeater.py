@@ -9,12 +9,14 @@ from map_lib import *
 from player_lib import *
 
 UDP_PORT = 27015
-axlimits = [1,35]
+axlimits = [0,35]
 aylimits = [1,255]
 nslist = []
 tplist = []
 old_player_list = []
 SLEEP_TIME = 10
+LEADERBOARD_THRESHOLD = 400
+OPTIMIZE_TIME = 10000
 
 bot_suffix_list = []
 
@@ -39,13 +41,20 @@ def update_leaderboard(player_obj):
 		new_player_regitered.save()
 	else:
 		player_update = player_query[0]
-		player_update.score = player_update.score + player_obj.score
-		player_update.duration = player_update.duration + player_obj.duration
+		player_update.score = max(player_update.score,player_obj.score)
+		player_update.duration = max(player_update.duration,player_obj.duration)
 		player_update.update_ratio()
 		player_update.save()
 		logging.info("LB update for: " + player_obj.name)
 	return
 
+def optimize_leaderboard():
+	lbquery = Player.objects.all().order_by("score")
+	if(len(lbquery) > LEADERBOARD_THRESHOLD):
+		for i in range(0,len(lbquery)-LEADERBOARD_THRESHOLD):
+			logging.error("Deleting"+lbquery[i].name)
+			lbquery[i].delete()
+			
 def update_server_list(new_server_list):
 	old_server_list = Server.objects.all()
 
@@ -133,7 +142,12 @@ def continuous_scan():
 			global tplist
 			global axlimits
 			global aylimits
+			count = 0
 			while True:
+				if count == OPTIMIZE_TIME:
+					optimize_leaderboard()
+					count = 0
+				count += 1
 				nslist = []
 				tplist = []
 				try:

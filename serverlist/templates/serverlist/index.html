@@ -3,34 +3,55 @@
 	<div class="header">
 	</div>
 	<title> Let's Play</title>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
 	{% load staticfiles %}
+	
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.css' %}" media="screen,projection"/>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
+	
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mainstyle.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 </head>
 
 <body >
-	<div class="banner">
-		<img src="{% static 'serverlist/images/logo.png' %}" width="300" height="150" alt = "Lets Play" align="middle">
-	</div>
+	<nav class="#2979ff blue accent-3" role="navigation">
+		<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">
+			<img src="{% static 'serverlist/images/logo.png' %}" width="120" height="60" alt = "Lets Play" align="middle">
+		</a>
+		<ul class="right hide-on-med-and-down">
+	        <li><a href="#">Home</a></li>
+	      </ul>
+
+	      <ul id="nav-mobile" class="side-nav">
+	        <li><a href="#">Home</a></li>
+	      </ul>
+	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		</div>
+	</nav>
 
 	<div class="display">
 		<div class="leaderboard">
 			<div class = "scorebased">
 				<div class="title">
-					Top Scorer
-				<hr/>
-				</div>
+					Highest Streak
+				<div class="divider"></div>
+			</div>
 				{% if leader_list_score %}
 				{% for player in leader_list_score %}
-					<div class="leaderentry">
-							<div class="name">{{ player.name }}</div>
+					<div class="leaderentry card-panel hoverable">
+							<div class="name" >{{ player.name }}</div>
 							<div class="score">{{ player.score }}</div>
 					</div>
 				{% endfor %}
 				{% else %}
-					<div class="leaderentry">
+					<div class="leaderentry card-panel hoverable">
 						No Player till now.
 					</div>
 				{% endif %}
@@ -39,17 +60,17 @@
 			<div class = "durationbased">
 				<div class="title">
 					Most Active
-					<hr/>
+					<div class="divider"></div>
 				</div>
 				{% if leader_list_duration %}
 				{% for player in leader_list_duration %}
-					<div class="leaderentry">
+					<div class="leaderentry card-panel hoverable">
 							<div class="name">{{ player.name }}</div>
 							<div class="score">{{ player.duration }} min</div>
 					</div>
 				{% endfor %}
 				{% else %}
-					<div class="leaderentry">
+					<div class="leaderentry card-panel hoverable">
 						No Player till now.
 					</div>
 				{% endif %}
@@ -58,13 +79,14 @@
 		<div class="list">
 			<div class="listheader">
 				Active Servers
-				<hr/>
+				<div class="divider"></div>
 			</div>
 
 			{% if latest_server_list %}
 			{% for server in latest_server_list %}
-			<a class="playerslink"   href="{{ server.link }}/">
-				<div class="entry {{ server.password_protected }}">
+
+			<a class="playerslink"    href="{{ server.link }}/")>
+				<div class="entry {{ server.password_protected }} card-panel hoverable">
 					<div class = "iptitle">
 						<div class="ip">
 							<b>{{ server.server_name }}</b> ({{ server.ip }})
@@ -89,7 +111,7 @@
 			</a>
 			{% endfor %}
 			{% else %}
-			<div class="entry {{ server.password_protected }}">
+			<div class="entry {{ server.password_protected }} card-panel hoverable valign-wrapper">
 				<div class="ip">
 					No servers could be found.
 				</div>{% endif %}
@@ -101,8 +123,10 @@
 
 		<div class="footer-right">
 
-			<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
-			<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
+			<p class="footer-links">
+				<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
+				<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
+			</p>
 
 		</div>
 
@@ -113,8 +137,6 @@
 				·
 				<a href="https://mobile.sdslabs.co/">Blog</a>
 				·
-				<a href="https://www.facebook.com/mdgiitr">About</a>
-				.
 				<a href="https://www.facebook.com/mdgiitr">Contact</a>
 			</p>
 

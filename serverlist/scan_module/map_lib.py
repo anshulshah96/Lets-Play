@@ -9,7 +9,8 @@ PACKETSIZE=1400
 WHOLE=-1
 SPLIT=-2
 
-IP_BASE_ADDRESS_A = "172.25"
+# IP_BASE_ADDRESS_A = "192.168"		#For within a subnet
+IP_BASE_ADDRESS_A = "172.25"		#For intranet
 
 server_list = []
 class sendThread (threading.Thread):

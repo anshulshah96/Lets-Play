@@ -3,18 +3,20 @@
 	<div class="header">
 	</div>
 	<title> Let's Play</title>
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
 	{% load staticfiles %}
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<!-- <link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.css' %}" media="screen,projection"/> -->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <script type="text/javascript" src="js/materialize.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	    
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/detailstyle.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
 </head>
 <body>
-<div class="main">
-	<div class="banner">
-		<img src="{% static 'serverlist/images/logo.png' %}" width="300" height="150" alt = "Lets Play" align="middle">
-	</div>
-
 	<div class="display">
 		<div class="content">
 			<a class="playerslink" href="{{ server.link }}/" >
@@ -24,7 +26,7 @@
 						<hr/>
 					</div>
 					<div class="serverinfo">
-						<table>
+						<table class = "flow-text">
 							<tr>
 								<th class="sth">IP Address</th>
 								<th class="sth">{{ server.ip }}</th>
@@ -80,11 +82,13 @@
 					<div class ="playerinfo"> 
 						{% if player_list %}
 							<table class="tablu">
+								<thead>
 								<tr class="headertr pth">
 									<th class="headertr pth">Name</th>
 									<th class="headertr pth">Score</th>
 									<th class="headertr pth">Duration</th>
 								</tr>
+								</thead>
 								{% for player in player_list %}
 								<tr>
 									<th class="pth">{{ player.name }}</th>
@@ -119,8 +123,6 @@
 				·
 				<a href="https://mobile.sdslabs.co/">Blog</a>
 				·
-				<a href="https://www.facebook.com/mdgiitr">About</a>
-				.
 				<a href="https://www.facebook.com/mdgiitr">Contact</a>
 			</p>
 
@@ -128,6 +130,5 @@
 		</div>
 
 	</footer>
-</div>
 </body>
 </html>
