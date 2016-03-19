@@ -1,19 +1,28 @@
 {% load staticfiles %}
+.display{
+	width: 100%;
+	margin: 0 auto;
+	padding: 7%;
+	padding-top: 0px;
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 .list{
 	font-family: 'Roboto',sans-serif;
 	float: left;
-	width: 700px;
-	/*width: 70%;*/
+	width: 60%;
 	min-height: 100%;
-	margin-left: 100px;
 }
 .leaderboard{
 	font-family: 'Roboto',sans-serif;
 	float: right;
-	width: 400px;
-	/*width: 30%;*/
-	margin-right: 120px;
-	min-height: 100%;
+	width: 25%;
 }
 
 .listheader{
@@ -41,11 +50,9 @@
 	font-size: 16px;
 	font-family: 'Roboto',sans-serif;
 	background-color: #173339;
-	/*opacity: 0.47;*/
 	background: rgba(0, 0, 0, 0.5);
 	font-weight: 300;
-	width: 600px;
-	/*height: 65px;*/
+	width: 100%;
 	border-radius: 15px;
 	margin: 0px auto;
 	margin-bottom: 10px;
@@ -62,16 +69,22 @@
 	text-align: middle;
 	font-size: 20px;
 	font-family: 'Roboto',sans-serif;
+	width: 100%;
 	font-weight: 300;
 	background-color: #3d5a64;
-	/*opacity: 0.47;*/
 	background: rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
 	margin: 0px auto;
+	min-height: 20px;
+	overflow: hidden;
 	margin-bottom: 10px;
 	padding: 4px;
 }
 .name{
+	text-align: middle;
+	display: inline-block;
+	white-space:normal;
+	overflow: hidden;
 	float: left;
 	font-weight: bold;
   	margin-left: 40px;
@@ -79,9 +92,10 @@
 	width: 45%;
 }
 .score{
-	-left: 30px;
+	text-align: middle;
+	overflow: hidden;
 }
-hr { 
+hr{ 
     display: block;
     margin-top: 0.0em;
     margin-bottom: 0.5em;

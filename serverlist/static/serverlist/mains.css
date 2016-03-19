@@ -21,15 +21,3 @@ body{
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
-
-.display{
-	width: 100%;
-	/*padding-top: 130px;*/
-	background-image: url("images/background.jpg");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: 100%;
-	display: inline-block;
-	overflow: hidden;
-	white-space: nowrap;
-}
