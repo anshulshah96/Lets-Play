@@ -1,13 +1,13 @@
 {% load staticfiles %}
 .content{
-	width: 1000px;
+	width: 80%;
 	margin: 0 auto;
+	height: 100%;
 	margin-bottom: 40px;
 	margin-top: 40px;
 	min-height: 100%;
 	border-radius: 15px;
 	background: rgba(0, 0, 0, 0.3);
-	min-height: 70%;
 }
 .serverinfo{
 	margin-top: 20px;
@@ -72,4 +72,16 @@ table{
 .playerslink{
 	text-decoration: none;
 	color: black;
+}
+.display{
+	min-height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	background-image: url("images/background.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%;
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
 }

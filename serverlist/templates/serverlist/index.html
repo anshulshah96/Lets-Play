@@ -5,11 +5,9 @@
 	<title> Let's Play</title>
 	{% load staticfiles %}
 	
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.css' %}" media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.min.css' %}" media="screen,projection"/>
 		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	    <script type="text/javascript" src="js/materialize.min.js"></script>
 
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
@@ -32,54 +30,16 @@
 	      <ul id="nav-mobile" class="side-nav">
 	        <li><a href="#">Home</a></li>
 	      </ul>
-	      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 		</div>
 	</nav>
 
 	<div class="display">
-		<div class="leaderboard">
-			<div class = "scorebased">
-				<div class="title">
-					Highest Streak
-				<div class="divider"></div>
-			</div>
-				{% if leader_list_score %}
-				{% for player in leader_list_score %}
-					<div class="leaderentry card-panel hoverable">
-							<div class="name" >{{ player.name }}</div>
-							<div class="score">{{ player.score }}</div>
-					</div>
-				{% endfor %}
-				{% else %}
-					<div class="leaderentry card-panel hoverable">
-						No Player till now.
-					</div>
-				{% endif %}
-			</div>
 
-			<div class = "durationbased">
-				<div class="title">
-					Most Active
-					<div class="divider"></div>
-				</div>
-				{% if leader_list_duration %}
-				{% for player in leader_list_duration %}
-					<div class="leaderentry card-panel hoverable">
-							<div class="name">{{ player.name }}</div>
-							<div class="score">{{ player.duration }} min</div>
-					</div>
-				{% endfor %}
-				{% else %}
-					<div class="leaderentry card-panel hoverable">
-						No Player till now.
-					</div>
-				{% endif %}
-			</div>
-		</div>
 		<div class="list">
 			<div class="listheader">
 				Active Servers
-				<div class="divider"></div>
+				<!-- <div class="divider"></div> -->
+				<hr/>
 			</div>
 
 			{% if latest_server_list %}
@@ -114,7 +74,48 @@
 			<div class="entry {{ server.password_protected }} card-panel hoverable valign-wrapper">
 				<div class="ip">
 					No servers could be found.
-				</div>{% endif %}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+
+		<div class="leaderboard">
+			<div class = "scorebased">
+				<div class="title">
+					Highest Streak
+				<hr/>
+				</div>
+				{% if leader_list_score %}
+				{% for player in leader_list_score %}
+					<div class="leaderentry card-panel hoverable">
+							<div class="name" >{{ player.name }}</div>
+							<div class="score">{{ player.score }}</div>
+					</div>
+				{% endfor %}
+				{% else %}
+					<div class="leaderentry card-panel hoverable">
+						No Player till now.
+					</div>
+				{% endif %}
+			</div>
+
+			<div class = "durationbased">
+				<div class="title">
+					Most Active
+					<hr/>
+				</div>
+				{% if leader_list_duration %}
+				{% for player in leader_list_duration %}
+					<div class="leaderentry card-panel hoverable">
+							<div class="name">{{ player.name }}</div>
+							<div class="score">{{ player.duration }} min</div>
+					</div>
+				{% endfor %}
+				{% else %}
+					<div class="leaderentry card-panel hoverable">
+						No Player till now.
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -145,5 +146,9 @@
 
 	</footer>
 </body>
+
+<!-- Import js functions in the end for faster loading -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
 
 </html>
