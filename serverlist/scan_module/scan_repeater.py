@@ -19,13 +19,16 @@ LEADERBOARD_THRESHOLD = 400
 OPTIMIZE_TIME = 10000
 
 bot_suffix_list = []
+bot_difficulty_levels = ["Easy","Fair","Normal","Tough","Hard","Very Hard","Expert","Elite"]
+
 
 def check_bot(name):
-	for difficulty in bot_suffix_list:
+	global bot_difficulty_levels
+	for i,difficulty in enumerate(bot_suffix_list):
 		for bot_name in difficulty:
 			if(name.endswith(bot_name)):
-				return True;
-	return False;
+				return True,bot_difficulty_levels[i];
+	return False,None;
 
 def update_leaderboard(player_obj):
 	if player_obj.bot:
@@ -113,7 +116,7 @@ def update_player_list(new_player_list):
 			old_score = query_list[0].score
 
 		new_dictionary = {
-			'score' : player_obj['score'], 'duration' : int(player_obj['duration'])	, 'bot' : player_obj['bot']
+			'score' : player_obj['score'], 'duration' : int(player_obj['duration'])	, 'bot' : player_obj['bot'], 'bot_level' : player_obj['bot_level']
 		}
 		obj, created = PlayerTemp.objects.update_or_create	(server = player_obj['server_obj'], name = player_obj['name'], defaults = new_dictionary)
 		checklist.append((obj.name,obj.server))
@@ -151,7 +154,7 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 15.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 20.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 
 				    new_server_list = scanner.getServerList()
@@ -168,7 +171,7 @@ def continuous_scan():
 				    		if player['score'] < 0:
 				    		  	player['score'] = 0
 				    		player['duration'] /= 60 #duration is in minutes
-				    		player['bot'] = check_bot(player['name'])
+				    		player['bot'],player['bot_level'] = check_bot(player['name'])
 				    		tplist.append(player)
 				    update_player_list(tplist)
 				    update_server_list(new_server_list)
