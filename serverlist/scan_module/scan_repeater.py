@@ -161,8 +161,10 @@ def continuous_scan():
 				    	player_query = PlayerQuery(serv.ip,UDP_PORT)
 				    	player_query.host = serv.ip
 				    	player_list = player_query.player()
+				    	player_list = map(lambda pl: pl.update({'server_obj':serv}) ,player_list)
+				    	pla = map(check_player,player_list)
 				    	for player in player_list:
-				    		player['server_obj'] = serv
+				    		# player['server_obj'] = serv
 				    		if player['duration'] == -1:
 				    			player['duration'] = 0
 				    		if player['score'] < 0:
