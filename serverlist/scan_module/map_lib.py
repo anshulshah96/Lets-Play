@@ -14,12 +14,13 @@ IP_BASE_ADDRESS_A = "172.25"		#For intranet
 
 server_list = []
 class sendThread (threading.Thread):
-	def __init__(self, axlimits, aylimits, udp, port):
+	def __init__(self, axlimits, aylimits, udp, port, wait):
 		threading.Thread.__init__(self)
 		self.axlimits = axlimits
 		self.aylimits = aylimits
 		self.udp        = udp
 		self.port       = port
+		self.wait 		= wait
 	def run(self):
 		logging.info("Starting Sender Thread")
 
@@ -41,7 +42,7 @@ class sendThread (threading.Thread):
 					else:
 						logging.info("Sender Error at ip "+ current_ip + " error: " + str(msg))
 					continue
-			time.sleep(0.1);
+			time.sleep(self.wait);
 			logging.debug("Scanned X " + str(i))
 		logging.info("Sender Thread Ended")
 
@@ -127,8 +128,9 @@ class receiverThread (threading.Thread):
 			    raise SourceQueryError("Received invalid packet type %d" % (typ,))
 
 class SourceScanner(object):
-	def __init__(self,port=27015, timeout=2.0, axlimits = [1,255], aylimits = [1,255]):
+	def __init__(self,port=27015, timeout=2.0, axlimits = [1,255], aylimits = [1,255], wait = 0.2):
 			self.port = port
+			self.wait = wait
 			self.timeout = timeout
 			self.axlimits = axlimits
 			self.aylimits = aylimits
@@ -147,7 +149,7 @@ class SourceScanner(object):
 			rthread = receiverThread(self.udp)
 			rthread.start()
 
-			sthread = sendThread(self.axlimits,self.aylimits,self.udp,self.port)
+			sthread = sendThread(self.axlimits,self.aylimits,self.udp,self.port,self.wait)
 			sthread.start()
 			sthread.join()
 

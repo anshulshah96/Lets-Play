@@ -94,7 +94,10 @@
 									<th class="pth">{{ player.name }}</th>
 									<th class="pth">{{ player.score }}</th>
 									<th class="pth">{{ player.duration }} min</th>
-									{% if player.bot %} <th class="pth" >BOT</th> {% endif %}
+									{% if player.bot %} 
+										<th class="pth" >BOT</th> 
+										<th class="pth" >{{ player.bot_level }}</th> 
+									{% endif %}
 								</tr>
 								{% endfor %}
 						    </table>

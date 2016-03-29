@@ -16,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mainstyle.css' %}" />
 	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/introjs.css' %}"/>
 </head>
 
 <body >
@@ -24,18 +25,18 @@
 			<img src="{% static 'serverlist/images/logo.png' %}" width="120" height="60" alt = "Lets Play" align="middle">
 		</a>
 		<ul class="right hide-on-med-and-down">
-	        <li><a href="#">Home</a></li>
+	        <li><a href="#" onclick="javascript:introJs().start();">Help</a></li>
 	      </ul>
 
 	      <ul id="nav-mobile" class="side-nav">
-	        <li><a href="#">Home</a></li>
+	        <li><a href="#" onclick="javascript:introJs().start();">Help</a></li>
 	      </ul>
 		</div>
 	</nav>
 
 	<div class="display">
 
-		<div class="list">
+		<div class="list" >
 			<div class="listheader">
 				Active Servers
 				<!-- <div class="divider"></div> -->
@@ -45,7 +46,8 @@
 			{% if latest_server_list %}
 			{% for server in latest_server_list %}
 
-			<a class="playerslink"    href="{{ server.link }}/")>
+			<a class="playerslink"    href="{{ server.link }}/" 
+			data-step="1" data-intro="List of CS Servers active currently" data-position="right">
 				<div class="entry {{ server.password_protected }} card-panel hoverable">
 					<div class = "iptitle">
 						<div class="ip">
@@ -71,7 +73,8 @@
 			</a>
 			{% endfor %}
 			{% else %}
-			<div class="entry {{ server.password_protected }} card-panel hoverable valign-wrapper">
+			<div class="entry {{ server.password_protected }} card-panel hoverable valign-wrapper"
+			data-step="1" data-intro="Shows the list of Active Servers" data-position="right">
 				<div class="ip">
 					No servers could be found.
 				</div>
@@ -79,12 +82,14 @@
 			{% endif %}
 		</div>
 
-		<div class="leaderboard">
+		<div class="leaderboard" >
 			<div class = "scorebased">
 				<div class="title">
 					Highest Streak
 				<hr/>
-				</div>
+				</div >
+
+				<div data-step="2" data-intro="Players with highest kills in a single session" data-position="left">
 				{% if leader_list_score %}
 				{% for player in leader_list_score %}
 					<div class="leaderentry card-panel hoverable">
@@ -97,13 +102,17 @@
 						No Player till now.
 					</div>
 				{% endif %}
+				</div>
+
 			</div>
 
-			<div class = "durationbased">
+			<div class = "durationbased" >
 				<div class="title">
 					Most Active
 					<hr/>
 				</div>
+
+				<div data-step="3" data-intro="Players playing for longest duration in a single session" data-position="left">
 				{% if leader_list_duration %}
 				{% for player in leader_list_duration %}
 					<div class="leaderentry card-panel hoverable">
@@ -116,13 +125,15 @@
 						No Player till now.
 					</div>
 				{% endif %}
+				</div>
+
 			</div>
 		</div>
 	</div>
 
-	<footer class="footer-distributed">
+	<footer class="footer-distributed"  data-step="4" data-intro="Get in touch with us" data-position="top">
 
-		<div class="footer-right">
+		<div class="footer-right" data-step="5" data-intro="Report Bugs" data-position="top">
 
 			<p class="footer-links">
 				<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
@@ -133,14 +144,15 @@
 
 		<div class="footer-left">
 
-			<p class="footer-links">
-				<a href="/serverlist/">Home</a>
-				·
-				<a href="https://mobile.sdslabs.co/">Blog</a>
-				·
-				<a href="https://www.facebook.com/mdgiitr">Contact</a>
-			</p>
-
+			<div>
+				<p class="footer-links" >
+					<a href="/serverlist/">Home</a>
+					·
+					<a href="https://mobile.sdslabs.co/" >Blog</a>
+					·
+					<a href="https://www.facebook.com/mdgiitr">Contact</a>
+				</p>
+			</div>
 			<p>Mobile Development Group IIT Roorkee &copy; 2016</p>
 		</div>
 
@@ -149,6 +161,7 @@
 
 <!-- Import js functions in the end for faster loading -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'serverlist/js/intro.js' %}"></script>
+<script type="text/javascript" src="{% static 'serverlist/js/materialize.min.js' %}"></script>
 
 </html>
