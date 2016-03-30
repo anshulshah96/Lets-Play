@@ -10,3 +10,4 @@ Django based app for showing the list of the CS servers within the IIT-R campus
 3. Copy LPapp/configuration.py.sample to LPapp/configuration.py provide the DB and user details.
 4. Run ./manage.py migrate.
 5. Run ./manage.py runserver
+6. Run by using python manage.py runserver --noreload --insecure ip:port

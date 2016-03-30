@@ -21,7 +21,6 @@ OPTIMIZE_TIME = 10000
 bot_suffix_list = []
 bot_difficulty_levels = ["Easy","Easy","Normal","Normal","Hard","Hard","Expert","Expert"]
 
-
 def check_bot(name):
 	global bot_difficulty_levels
 	for i,difficulty in enumerate(bot_suffix_list):
@@ -29,7 +28,6 @@ def check_bot(name):
 			if(name.endswith(bot_name)):
 				return True,bot_difficulty_levels[i];
 	return False,"None";
-
 def update_leaderboard(player_obj):
 	if player_obj.bot:
 		return
@@ -131,7 +129,8 @@ def update_player_list(new_player_list):
 			logging.debug("Present Player: " + obj.name + "in" + player_obj['server_obj'].ip)
 	for player_obj in old_player_list:
 		if not (player_obj.name,player_obj.server) in checklist:
-			update_leaderboard(player_obj)
+			if player_obj.server.num_bots == 0:
+				update_leaderboard(player_obj)
 			player_obj.delete()
 
 def continuous_scan():

@@ -2,7 +2,6 @@
 .content{
 	width: 80%;
 	margin: 0 auto;
-	height: 100%;
 	margin-bottom: 40px;
 	margin-top: 40px;
 	min-height: 100%;
@@ -12,13 +11,15 @@
 .serverinfo{
 	margin-top: 20px;
 	margin-left: 40px;
-	margin-right: 20px;
+	margin-right: 10px;
 	line-height: 24px;
 	display: inline-block;
 	width: 30%;
 	vertical-align: top;
 }
 .playerinfo{
+	margin-top: 20px;
+	margin-right: 20px;
 	color: white;
 	width: 60%;
 	padding: 10px;
@@ -42,7 +43,7 @@ table{
 }
 .entry{
 	font-family: 'Roboto',sans-serif;
-	padding: 20px;
+	padding-top: 20px;
 }
 .ip{
 	text-align: left;
@@ -77,7 +78,7 @@ table{
 	min-height: 100%;
 	width: 100%;
 	margin: 0 auto;
-	background-image: url("images/background.jpg");
+	background-image: url("../images/background.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100%;

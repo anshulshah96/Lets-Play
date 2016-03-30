@@ -4,7 +4,8 @@
 	margin: 0 auto;
 	padding: 7%;
 	padding-top: 0px;
-	background-image: url("images/background.jpg");
+	padding-bottom:30px;
+	background-image: url("../images/background.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: 100%;
@@ -66,13 +67,11 @@
 }
 .leaderentry{
 	color: white;
-	text-align: middle;
 	font-size: 20px;
 	font-family: 'Roboto',sans-serif;
-	width: 100%;
-	font-weight: 300;
 	background-color: #3d5a64;
 	background: rgba(0, 0, 0, 0.5);
+	width: 100%;
 	border-radius: 15px;
 	margin: 0px auto;
 	min-height: 20px;
@@ -81,18 +80,18 @@
 	padding: 4px;
 }
 .name{
-	text-align: middle;
+	float: left;
 	display: inline-block;
 	white-space:normal;
 	overflow: hidden;
-	float: left;
 	font-weight: bold;
-  	margin-left: 40px;
-  	margin-right: 40px;
-	width: 45%;
+  	margin-left: 30px;
+	width: 50%;
 }
 .score{
-	text-align: middle;
+	font-weight: 300;
+	text-align: center;
+	vertical-align: middle;
 	overflow: hidden;
 }
 hr{ 

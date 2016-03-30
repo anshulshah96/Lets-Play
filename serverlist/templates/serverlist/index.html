@@ -5,16 +5,15 @@
 	<title> Let's Play</title>
 	{% load staticfiles %}
 	
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.min.css' %}" media="screen,projection"/>
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
 	
-	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mains.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/mainstyle.css' %}" />
-	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/footer.css' %}" />
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'serverlist/images/favicon.ico' %}" />
+	<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/materialize.min.css' %}" media="screen,projection"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/css/mains.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/css/mainstyle.css' %}" />
+	<link rel="stylesheet" type="text/css" href="{% static 'serverlist/css/footer.css' %}" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 	<link type="text/css" rel="stylesheet" href="{% static 'serverlist/css/introjs.css' %}"/>
 </head>
@@ -43,18 +42,18 @@
 				<hr/>
 			</div>
 
+			<div data-step="1" data-intro="List of CS Servers active currently" data-position="right">
 			{% if latest_server_list %}
 			{% for server in latest_server_list %}
 
-			<a class="playerslink"    href="{{ server.link }}/" 
-			data-step="1" data-intro="List of CS Servers active currently" data-position="right">
+			<a class="playerslink"    href="{{ server.link }}/" >
 				<div class="entry {{ server.password_protected }} card-panel hoverable">
 					<div class = "iptitle">
 						<div class="ip">
 							<b>{{ server.server_name }}</b> ({{ server.ip }})
 						</div>
 						<div class = "lock{{ server.password_protected }}">
-							{% if server.password_protected == 'Yes' %}		<img src="{% static 'serverlist/images/lockhs.png' %}" width="30" height="30" alt = "Locked" align="middle">
+							{% if server.password_protected == 'Yes' %}		<img src="{% static 'serverlist/images/lock_closed.png' %}" width="30" height="30" alt = "Locked" align="middle">
 							{% endif %}
 						</div>
 					</div>
@@ -72,6 +71,7 @@
 				</div>
 			</a>
 			{% endfor %}
+			</div>
 			{% else %}
 			<div class="entry {{ server.password_protected }} card-panel hoverable valign-wrapper"
 			data-step="1" data-intro="Shows the list of Active Servers" data-position="right">
@@ -89,7 +89,7 @@
 				<hr/>
 				</div >
 
-				<div data-step="2" data-intro="Players with highest kills in a single session" data-position="left">
+				<div data-step="2" data-intro="Players with highest kills in a single session without any BOT" data-position="left">
 				{% if leader_list_score %}
 				{% for player in leader_list_score %}
 					<div class="leaderentry card-panel hoverable">
@@ -133,10 +133,11 @@
 
 	<footer class="footer-distributed"  data-step="4" data-intro="Get in touch with us" data-position="top">
 
-		<div class="footer-right" data-step="5" data-intro="Report Bugs" data-position="top">
+		<div class="footer-right" data-step="5" data-intro="Found a Bug? Report here..." data-position="top">
 
 			<p class="footer-links">
-				<a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a>
+				<!-- <a href="https://www.facebook.com/anshul.shah96"><i class="fa fa-facebook"></i></a> -->
+				<a href="mailto:anshulshah96@gmail.com"><i class="fa fa-envelope"></i></a>
 				<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
 			</p>
 
