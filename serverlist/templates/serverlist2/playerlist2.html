@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title> Let's Play</title>
+		{% load staticfiles %}
+
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'serverlist2/images/favicon.ico' %}" />
+		<link href="{% static 'serverlist2/css/bootstrap.css' %}" rel="stylesheet">
+		
+		<link rel="stylesheet" type="text/css" href="{% static 'serverlist2/css/footer.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'serverlist2/css/font-awesome.min.css' %}" >
+		<link type="text/css" rel="stylesheet" href="{% static 'serverlist2/css/introjs.css' %}"/>
+
+		<style>
+			html,body {
+				font-family: 'Roboto', sans-serif;
+				height:100%;
+				padding-top: 40px;
+				background-color: #F1F1F1;
+			}
+			.table {
+  			table-layout:fixed;
+			}
+			.table th {
+			  white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			}
+			.sth{
+				font-weight: 500;
+				overflow: hidden;
+			}
+		</style>
+
+	</head>
+
+<body>
+
+	<!-- Navigation Bar -->
+	<nav class="navbar navbar-light navbar-fixed-top bg-primary">
+	  <div class="container">
+
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+      	<a href="/serverlist2/">
+	    		<img src="{% static 'serverlist2/images/logo.png' %}" width="100" height="50" alt = "Lets-Play!">
+				</a>
+	    </div>
+
+	    <p class="navbar-text">For Counter Strike Enthusiasts</p>
+
+      <ul class="nav navbar-nav navbar-right">
+      	<a href="/serverlist2/">
+	        	<button type="button" class="btn btn-primary bt-lg navbar-btn">Main Page</button>
+				</a>
+      </ul>
+
+	  </div><!-- /.container -->
+	</nav>
+
+	<!-- Container For Data -->
+	<div class="container" style="min-height:100%">
+		<div class="panel panel-info">
+
+			<!-- Server name and ip as Header -->
+			<div class="panel-heading">
+				<h2 class="text-center">{{ server.server_name }} ({{ server.ip }})</h2>
+			</div>
+
+			<!-- Panel for Server and Player Info -->
+		  <div class="panel-body">
+		  	<div class="row"> 
+
+				<!-- Server Info in detail in a table-->
+				<div class="col-sm-4">
+					<div class="panel panel-default">
+		  			<table class = "table table-striped">
+							<tr>
+								<th class="sth">IP Address</th>
+								<th class="sth">{{ server.ip }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Map</th>
+								<th class="sth">{{ server.map_name }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Password</th>
+								<th class="sth">{{ server.password_protected }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Total Players</th>
+								<th class="sth">{{ server.num_players }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Max Players</th>
+								<th class="sth">{{ server.max_players }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Bots</th>
+								<th class="sth">{{ server.num_bots }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Game</th>
+								<th class="sth">{{ server.game_name }}</th>
+								
+							</tr>
+							<tr>
+								<th class="sth">Environment</th>
+								<th class="sth">{{ server.environment }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Server Name</th>
+								<th class="sth">{{ server.server_name }}</th>
+							</tr>
+							<tr>
+								<th class="sth">Response Type</th>
+								<th class="sth">{{ server.response_header }}</th>
+							</tr>
+							<tr>
+								<th class="sth">VAC Secured</th>
+								<th class="sth">{{ server.vac_secured }}</th>
+
+							</tr>
+							<tr>
+								<th class="sth">Server Type</th>
+								<th class="sth">{{ server.server_type }}</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<!-- Player Details -->
+				<div class="col-sm-8">
+					<div class="panel panel-default">
+						{% if player_list %}
+							<table class="table table-hover table-responsive" >
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Score</th>
+										<th>Duration</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+								{% for player in player_list %}
+								<tbody>
+									<tr>
+										<td>{{ player.name }}</td>
+										<td>{{ player.score }}</td>
+										<td>{{ player.duration }} min</td>
+										{% if player.bot %} 
+											<th>BOT</th>
+											<th>{{ player.bot_level }}</th> 
+										{% else %}
+											<th>HUMAN</th>
+											<th></th>
+										{% endif %}
+									</tr>
+								</tbody>
+								{% endfor %}
+						  </table>
+						{% else %}
+						    <p>No player is present.</p>
+						{% endif %}
+					</div>
+				</div>
+
+			</div>
+		  </div>
+
+		</div>
+	</div>
+
+	<!-- Body Footer -->
+	<footer class="footer-distributed" >
+
+		<div class="footer-right">
+
+			<p class="footer-links">
+				<a href="https://github.com/anshulshah96/Lets-Play"><i class="fa fa-github"></i></a>
+				<a href="mailto:anshulshah96@gmail.com"><i class="fa fa-envelope"></i></a>
+				<a href="https://developer.valvesoftware.com/wiki/Server_queries"><i class="fa fa-steam"></i></a>
+			</p>
+
+		</div>
+
+		<div class="footer-left">
+			<div>
+				<p class="footer-links" >
+					<a href="/serverlist/">Home</a>
+					·
+					<a href="https://mobile.sdslabs.co/" >Blog</a>
+					·
+					<a href="https://www.facebook.com/mdgiitr">Contact</a>
+				</p>
+			</div>
+			<p>Mobile Development Group IIT Roorkee &copy; 2016</p>
+		</div>
+	</footer>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'serverlist2/js/bootstrap.min.js' %}" ></script>
+    <!-- Include intro.js -->
+		<script type="text/javascript" src="{% static 'serverlist2/js/intro.js' %}"></script>
+</body>
+
+</html>

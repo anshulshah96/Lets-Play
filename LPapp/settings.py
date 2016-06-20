@@ -25,7 +25,7 @@ SECRET_KEY = 'mc+w(=%disq6)#q5)6u2$y9l8ouyn5+$l7x)7v@gs8i3zh9%7#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = configuration.debug
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = configuration.allowed_hosts
 
 
@@ -91,3 +91,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = "/var/www/letsplay/static/"

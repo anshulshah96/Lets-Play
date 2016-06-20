@@ -10,4 +10,6 @@ urlpatterns = patterns('',
     url(r'^serverlist/(?P<server_id>\w+)/$', views.ip_details, name='ip_details'),
  	url(r'^serverlist_json/$', views.serverlist_json, name='serverlist_json'),
     url(r'^serverlist_json/(?P<server_id>\w+)/$', views.ip_details_json, name='ip_details'),
+    url(r'^serverlist2/$', views.index2, name='index2'),
+    url(r'^serverlist2/(?P<server_id>\w+)/$', views.ip_details2, name='ip_details2'),
 )
