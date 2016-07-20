@@ -23,6 +23,9 @@
 				padding-top: 70px;
 				background-color: #F1F1F1;
 			}
+			html{
+				height: 100%;
+			}
 			.table {
   			table-layout:fixed;
 			}
@@ -30,6 +33,12 @@
 			  white-space: nowrap;
 			  overflow: hidden;
 			  text-overflow: ellipsis;
+			}
+			.show {
+				color: black;
+			}
+			.show:hover{	//Atleast I Tried
+				background-color: blue;
 			}
 		</style>
 
@@ -60,7 +69,7 @@
 <body>
 
 	<!-- Navigation Bar -->
-	<nav class="navbar navbar-light navbar-fixed-top bg-primary">
+	<nav class="navbar navbar-dark navbar-fixed-top bg-primary">
 	  <div class="container">
 
 	    <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,8 +82,9 @@
 	    <p class="navbar-text">For Counter Strike Enthusiasts</p>
 
       <ul class="nav navbar-nav navbar-right">
-	        	<button type="button" class="btn btn-primary bt-lg navbar-btn" 
-					onclick="javascript:introJs().start();" >HELP</button>
+        	<!-- <button type="button" class="btn btn-primary bt-lg navbar-btn" 
+				onclick="javascript:introJs().start();" >HELP</button> -->
+			<li><a class="nav-item nav-link active show" href="javascript:introJs().start();">HELP</a></li>
       </ul>
 
 	  </div><!-- /.container -->
@@ -82,7 +92,7 @@
 
 
 	<!-- Container For Data -->
-	<div class="container">
+	<div class="container" style="min-height:100%">
 	  	<div class="row">
 				
 			<!-- Server List Column -->
@@ -166,7 +176,7 @@
 					{% else %}
 						<div class="panel panel-danger" >
 							<div class="panel-heading">
-								<h3 class="panel-title" >No Server is active Right Now</h3>
+								<h3 class="panel-title" >No Server is active right now</h3>
 							</div>
 						</div>
 					{% endif %}
@@ -259,11 +269,11 @@
 	</footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'serverlist2/js/jquery-3.0.0.min.js' %}" ></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'serverlist2/js/bootstrap.min.js' %}" ></script>
     <!-- Include intro.js -->
-		<script type="text/javascript" src="{% static 'serverlist2/js/intro.js' %}"></script>
+	<script type="text/javascript" src="{% static 'serverlist2/js/intro.js' %}"></script>
 </body>
 
 </html>
