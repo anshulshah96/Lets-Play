@@ -1,10 +1,10 @@
 Lets-Play
 ==========
 
-  * [Introduction](#Introduction)
-  * [Scan Module](#Scan-Module)
-  * [Preview](#Preview)
-  * [Setup](#Setup)
+  * [Introduction](#introduction)
+  * [Scan Module](#scan-module)
+  * [Preview](#preview)
+  * [Setup](#setup)
   * [License](#license)
   
 Introduction
