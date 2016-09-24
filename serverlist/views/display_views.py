@@ -38,7 +38,6 @@ def index(request):
 				'leader_list_duration': leader_list_duration}
 	return render(request,'serverlist/index.html',context)
 
-@cache_page(20)
 def home(request):
 	return redirect("/serverlist/")
 
