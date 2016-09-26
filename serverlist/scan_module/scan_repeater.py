@@ -15,7 +15,7 @@ nslist = []
 tplist = []
 old_player_list = []
 SLEEP_TIME = 10
-LEADERBOARD_THRESHOLD = 400
+LEADERBOARD_THRESHOLD = 1000
 OPTIMIZE_TIME = 10000
 
 bot_suffix_list = []
@@ -129,8 +129,9 @@ def update_player_list(new_player_list):
 			logging.debug("Present Player: " + obj.name + "in" + player_obj['server_obj'].ip)
 	for player_obj in old_player_list:
 		if not (player_obj.name,player_obj.server) in checklist:
-			if player_obj.server.num_bots == 0:
-				update_leaderboard(player_obj)
+			# if player_obj.server.num_bots == 0:
+			# 	update_leaderboard(player_obj)
+			update_leaderboard(player_obj)	
 			player_obj.delete()
 
 def continuous_scan():
@@ -153,7 +154,7 @@ def continuous_scan():
 				nslist = []
 				tplist = []
 				try:
-				    scanner = SourceScanner(timeout = 20.0, axlimits = axlimits, aylimits = aylimits)
+				    scanner = SourceScanner(timeout = 40.0, axlimits = axlimits, aylimits = aylimits)
 				    scanner.scanServers()
 
 				    new_server_list = scanner.getServerList()
