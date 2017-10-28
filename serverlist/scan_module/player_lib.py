@@ -4,10 +4,10 @@ import logging
 
 from source_packet import *
 
-PACKETSIZE=1400
+PACKETSIZE = 1400
 
-WHOLE=-1
-SPLIT=-2
+WHOLE = -1
+SPLIT = -2
 
 # A2S_PLAYER
 A2S_PLAYER = ord('U')
@@ -16,6 +16,7 @@ A2S_PLAYER_REPLY = ord('D')
 # S2C_CHALLENGE
 CHALLENGE = -1
 S2C_CHALLENGE = ord('A')
+
 
 class PlayerQuery(object):
     """Example usage:
@@ -109,7 +110,7 @@ class PlayerQuery(object):
             packet.putByte(A2S_PLAYER)
             packet.putLong(challenge)
         except KeyboardInterrupt:
-            logging.error("KeyboardInterrupt exiting...")   
+            logging.error("KeyboardInterrupt exiting...")
             sys.exit(0)
             return []
         except Exception, e:

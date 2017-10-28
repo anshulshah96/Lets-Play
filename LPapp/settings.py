@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import configuration
 import sys
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -27,7 +26,6 @@ SECRET_KEY = 'mc+w(=%disq6)#q5)6u2$y9l8ouyn5+$l7x)7v@gs8i3zh9%7#'
 DEBUG = configuration.debug
 TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = configuration.allowed_hosts
-
 
 # Application definition
 
@@ -55,7 +53,6 @@ ROOT_URLCONF = 'LPapp.urls'
 
 WSGI_APPLICATION = 'LPapp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -63,13 +60,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': configuration.db,
-    'USER':configuration.user,
-    'PASSWORD':configuration.password,
-    'HOST':configuration.host,
-    'port':configuration.port,
-    'OPTIONS': {
-         "init_command": "SET foreign_key_checks = 0;",
-    },
+        'USER': configuration.user,
+        'PASSWORD': configuration.password,
+        'HOST': configuration.host,
+        'port': configuration.port,
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0;",
+        },
     }
 }
 
@@ -85,7 +82,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
