@@ -3,7 +3,7 @@ import threading
 import time
 import logging
 
-from source_packet import *
+from serverlist.scan_module.source_packet import *
 
 PACKETSIZE = 1400
 WHOLE = -1
@@ -104,7 +104,7 @@ class receiverThread(threading.Thread):
                 total = packet.getByte()
                 num = packet.getByte()
                 splitsize = packet.getShort()
-                result = [0 for x in xrange(total)]
+                result = [0 for x in range(total)]
 
                 result[num] = packet.read()
 

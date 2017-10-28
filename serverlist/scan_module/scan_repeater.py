@@ -5,8 +5,8 @@ import threading
 
 from serverlist.models import *
 from struct import *
-from map_lib import *
-from player_lib import *
+from serverlist.scan_module.map_lib import *
+from serverlist.scan_module.player_lib import *
 
 UDP_PORT = 27015
 axlimits = [0, 35]

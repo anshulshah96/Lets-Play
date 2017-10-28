@@ -1,8 +1,8 @@
 import socket, struct, sys, time
-import StringIO
+from io import StringIO
 import logging
 
-from source_packet import *
+from serverlist.scan_module.source_packet import *
 
 PACKETSIZE = 1400
 

@@ -2,10 +2,11 @@ from django.apps import AppConfig
 import socket, sys, os
 import logging
 import threading
-import thread
+import _thread
 import time
 from serverlist.models import *
 from serverlist.scan_module import *
+from serverlist.scan_module import scan_repeater
 
 
 class MyAppConfig(AppConfig):
@@ -15,7 +16,7 @@ class MyAppConfig(AppConfig):
 
     def ready(self):
         try:
-            thread.start_new_thread(scan_repeater.continuous_scan, ())
+            _thread.start_new_thread(scan_repeater.continuous_scan, ())
             pass
         except Exception as e:
             logging.exception(str(e))
