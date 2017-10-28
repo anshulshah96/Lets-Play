@@ -188,7 +188,7 @@ def continuous_scan():
             logging.info(str(len(nslist)) + " servers found exiting...")
             sys.exit(0)
             raise
-        except Exception, msg:
+        except Exception as msg:
             logging.exception(str(msg))
         logging.info(str(len(nslist)) + " servers found, sleeping for " + str(SLEEP_TIME) + " seconds")
         time.sleep(SLEEP_TIME)

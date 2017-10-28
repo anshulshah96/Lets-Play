@@ -39,7 +39,7 @@ class sendThread(threading.Thread):
                 # logging.debug("Scanning "+ current_ip)
                 try:
                     self.udp.sendto(spacket.getvalue(), (current_ip, self.port))
-                except socket.error, msg:
+                except socket.error as msg:
                     if (msg[0] == 1):
                         logging.debug("Sender Error at ip " + current_ip + " error: " + str(msg))
                     else:
@@ -61,7 +61,7 @@ class receiverThread(threading.Thread):
         while True:
             try:
                 packet, addr = self.receive()
-            except socket.error, msg:
+            except socket.error as msg:
                 if msg[0] == 111:  # Error Connection Refused
                     logging.exception("Receiver Error " + str(msg))
                 elif str(msg[0]) == "timed out":
@@ -82,7 +82,7 @@ class receiverThread(threading.Thread):
     def receive(self):
         try:
             data, addr = self.udp.recvfrom(PACKETSIZE)
-        except socket.error, msg:
+        except socket.error as msg:
             raise
         except KeyboardInterrupt:
             logging.error("KeyboardInterrupt exiting...")

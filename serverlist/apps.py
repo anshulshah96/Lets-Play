@@ -17,6 +17,6 @@ class MyAppConfig(AppConfig):
         try:
             thread.start_new_thread(scan_repeater.continuous_scan, ())
             pass
-        except Exception, e:
+        except Exception as e:
             logging.exception(str(e))
             sys.exit(0)

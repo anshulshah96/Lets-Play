@@ -58,7 +58,7 @@ class PlayerQuery(object):
             total = packet.getByte()
             num = packet.getByte()
             splitsize = packet.getShort()
-            result = [0 for x in xrange(total)]
+            result = [0 for x in range(total)]
 
             result[num] = packet.read()
 
@@ -113,7 +113,7 @@ class PlayerQuery(object):
             logging.error("KeyboardInterrupt exiting...")
             sys.exit(0)
             return []
-        except Exception, e:
+        except Exception as e:
             logging.error("Error while player query for " + self.host)
             logging.error(str(e))
             return []
@@ -129,7 +129,7 @@ class PlayerQuery(object):
 
                 # TF2 32player servers may send an incomplete reply
                 try:
-                    for x in xrange(numplayers):
+                    for x in range(numplayers):
                         player = {}
                         player['index'] = packet.getByte()
                         player['name'] = packet.getString()
@@ -137,6 +137,6 @@ class PlayerQuery(object):
                         player['duration'] = packet.getFloat()
                         result.append(player)
 
-                except Exception, msg:
+                except Exception as msg:
                     logging.exception(str(msg))
                 return result

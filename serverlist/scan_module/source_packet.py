@@ -117,7 +117,7 @@ class SourceQueryPacket(StringIO.StringIO):
             player_list = []
             # TF2 32player servers may send an incomplete reply
             try:
-                for x in xrange(numplayers):
+                for x in range(numplayers):
                     player = {}
                     player['ip'] = self.host
                     player['index'] = self.getByte()
@@ -127,7 +127,7 @@ class SourceQueryPacket(StringIO.StringIO):
                     if player['duration'] < 0:  # For handling some exceptional responses
                         player['duration'] = 0
                     player_list.append(player)
-            except Exception, msg:
+            except Exception as msg:
                 logging.error(str(msg))
                 return None
             result['player_list'] = player_list
