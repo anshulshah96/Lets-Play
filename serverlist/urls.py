@@ -1,6 +1,6 @@
 from django.conf.urls import url
-
 from serverlist.views.display_views import *
+
 from serverlist.views.broadcast_views import *
 
 urlpatterns = [

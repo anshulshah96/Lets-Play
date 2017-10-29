@@ -26,11 +26,11 @@ class Server(models.Model):
     max_players = models.IntegerField(default=0)
     num_humans = models.IntegerField(default=0)
     num_bots = models.IntegerField(default=0)
-    folder = models.CharField(max_length=200)
+    folder = models.CharField(max_length=200, default="None")
     environment = models.CharField(max_length=200, default="Windows")  # w-Windows,l-Linux,m/o-Mac
     password_protected = models.CharField(max_length=10, default="No")  # 0 for public, 1 for private
     vac_secured = models.NullBooleanField(default=False)  # 0 for unsecured, 1 for secured
-    folder = models.CharField(max_length=200, default="None")
+    # folder = models.CharField(max_length=200, default="None")
     server_type = models.CharField(max_length=200, default="None")
     protocol = models.IntegerField(default=0)
     response_header = models.CharField(max_length=200, default="None")

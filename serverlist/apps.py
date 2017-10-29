@@ -1,12 +1,12 @@
 from django.apps import AppConfig
 import socket, sys, os
 import logging
-import threading
+# import threading
 import _thread
-import time
-from serverlist.models import *
-from serverlist.scan_module import *
-from serverlist.scan_module import scan_repeater
+# import time
+# from serverlist.models import *
+# from serverlist.scan_module import *
+# from serverlist.scan_module import scan_repeater
 
 
 class MyAppConfig(AppConfig):
@@ -15,9 +15,12 @@ class MyAppConfig(AppConfig):
     verbose_name = "My Application"
 
     def ready(self):
-        try:
-            _thread.start_new_thread(scan_repeater.continuous_scan, ())
-            pass
-        except Exception as e:
-            logging.exception(str(e))
-            sys.exit(0)
+        pass
+
+    # def ready(self):
+    #     try:
+    #         _thread.start_new_thread(scan_repeater.continuous_scan, ())
+    #         pass
+    #     except Exception as e:
+    #         logging.exception(str(e))
+    #         sys.exit(0)
