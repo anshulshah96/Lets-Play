@@ -1,0 +1,9 @@
+click==6.7
+dj-database-url==0.4.2
+Django==1.11.6
+Jinja2==2.9.6
+MarkupSafe==1.0
+psycopg2==2.7.3.2
+python-dotenv==0.7.1
+python-env==1.0.0
+pytz==2017.2
