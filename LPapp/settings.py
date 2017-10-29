@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 from LPapp import configuration
 import sys
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
@@ -56,25 +57,6 @@ WSGI_APPLICATION = 'LPapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': configuration.db,
-#         'USER': configuration.user,
-#         'PASSWORD': configuration.password,
-#         'HOST': configuration.host,
-#         'port': configuration.port,
-#         'OPTIONS': {
-#             "init_command": "SET foreign_key_checks = 0;",
-#         },
-#     }
-# }
-
-
-# DATABASES = {}
-
-import dj_database_url
-
 if 'DATABASE_URL' not in os.environ:
     print("Database url not found")
 
@@ -102,25 +84,6 @@ STATIC_ROOT = "/var/www/letsplay/static/"
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [
-#             BASE_DIR + '/templates/',
-#         ],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
-
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -136,11 +99,4 @@ TEMPLATES = [
             ],
         },
     },
-    # {
-    #     'BACKEND': 'django.template.backends.jinja2.Jinja2',
-    #     'DIRS': [
-    #         # '/home/html/jinja2',
-    #         BASE_DIR + '/templates/',
-    #     ],
-    # },
 ]
