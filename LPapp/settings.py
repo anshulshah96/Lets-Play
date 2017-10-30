@@ -10,12 +10,12 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-import configuration
+from LPapp import configuration
 import sys
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(BASE_DIR)
-
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -25,9 +25,8 @@ SECRET_KEY = 'mc+w(=%disq6)#q5)6u2$y9l8ouyn5+$l7x)7v@gs8i3zh9%7#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = configuration.debug
-TEMPLATE_DEBUG = False
+# TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = configuration.allowed_hosts
-
 
 # Application definition
 
@@ -55,23 +54,13 @@ ROOT_URLCONF = 'LPapp.urls'
 
 WSGI_APPLICATION = 'LPapp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': configuration.db,
-    'USER':configuration.user,
-    'PASSWORD':configuration.password,
-    'HOST':configuration.host,
-    'port':configuration.port,
-    'OPTIONS': {
-         "init_command": "SET foreign_key_checks = 0;",
-    },
-    }
-}
+if 'DATABASE_URL' not in os.environ:
+    print("Database url not found")
+
+DATABASES = {'default': dj_database_url.config()}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -86,10 +75,28 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
 
 STATIC_ROOT = "/var/www/letsplay/static/"
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        ,
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

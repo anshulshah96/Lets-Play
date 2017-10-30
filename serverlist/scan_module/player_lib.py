@@ -1,13 +1,13 @@
 import socket, struct, sys, time
-import StringIO
+from io import StringIO
 import logging
 
-from source_packet import *
+from serverlist.scan_module.source_packet import *
 
-PACKETSIZE=1400
+PACKETSIZE = 1400
 
-WHOLE=-1
-SPLIT=-2
+WHOLE = -1
+SPLIT = -2
 
 # A2S_PLAYER
 A2S_PLAYER = ord('U')
@@ -16,6 +16,7 @@ A2S_PLAYER_REPLY = ord('D')
 # S2C_CHALLENGE
 CHALLENGE = -1
 S2C_CHALLENGE = ord('A')
+
 
 class PlayerQuery(object):
     """Example usage:
@@ -57,7 +58,7 @@ class PlayerQuery(object):
             total = packet.getByte()
             num = packet.getByte()
             splitsize = packet.getShort()
-            result = [0 for x in xrange(total)]
+            result = [0 for x in range(total)]
 
             result[num] = packet.read()
 
@@ -109,10 +110,10 @@ class PlayerQuery(object):
             packet.putByte(A2S_PLAYER)
             packet.putLong(challenge)
         except KeyboardInterrupt:
-            logging.error("KeyboardInterrupt exiting...")   
+            logging.error("KeyboardInterrupt exiting...")
             sys.exit(0)
             return []
-        except Exception, e:
+        except Exception as e:
             logging.error("Error while player query for " + self.host)
             logging.error(str(e))
             return []
@@ -128,7 +129,7 @@ class PlayerQuery(object):
 
                 # TF2 32player servers may send an incomplete reply
                 try:
-                    for x in xrange(numplayers):
+                    for x in range(numplayers):
                         player = {}
                         player['index'] = packet.getByte()
                         player['name'] = packet.getString()
@@ -136,6 +137,6 @@ class PlayerQuery(object):
                         player['duration'] = packet.getFloat()
                         result.append(player)
 
-                except Exception, msg:
+                except Exception as msg:
                     logging.exception(str(msg))
                 return result
